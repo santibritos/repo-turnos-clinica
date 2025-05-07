@@ -1,0 +1,132 @@
+@charset "ISO-8859-1";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial';
+    font-size: 16px;
+    /* color: white; */
+    
+}
+:root
+{
+    --azulOscuro: #326273;
+    --celestito: #7EA8BE;
+    --aquamarine: #A4F9C8;
+    --iceblue: #A7FFF6;
+    --indigo:#133C55;
+    --riceblue:#386FA4;
+}
+
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main
+{
+    align-items:center;
+     margin-right: 150px;   
+     color: white;
+}
+.side
+{
+    
+     margin-left: 200px; 
+     gap: 20px;
+}
+#sideInfo
+{
+    border-radius: 15px;
+   
+   /** box-shadow: 0 6px 7px -1px rgba(0, 0, 0, 0.35);*/
+}
+#logoPrincipal
+{
+    border-radius: 15px;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 6px 7px -1px rgba(0, 0, 0, 0.35);
+}
+
+
+.login-container {
+    max-width: 450px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-control, .btn-primary
+{
+    border: none;
+   /* border-radius: 30px;*/
+}
+.form-control
+{
+    min-width: 200px;
+}
+.btn-primary
+{
+    font-size: 1.1em;
+}
+@media (max-width:780px) {
+    .nav-link{text-align: center;}
+    .login-container{
+        min-width: 99vw;
+        min-height: 60vh;
+    }
+    /*input[type=text], input[type=password], input[type=email] {
+    width: 99%;
+    min-width: 50px;
+    min-height: 50px;
+    padding: 0px;
+    height: 6vh;
+    }*/
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .side {
+        display: none;
+    }
+    
+}
+body
+{
+    
+    /* color:white; */
+    background-image: linear-gradient(to left,var(--riceblue),var(--indigo));
+}
+.btn-primary
+{
+    background-color: var(--indigo);
+    border-color: var(--azulOscuro);
+}
+.btn-primary:hover
+{
+    border-color: var(--celestito);
+}
+
+.h1-title
+{
+    
+    font-size: 3em;
+    background: -webkit-linear-gradient(#eee, var(--celestito));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#loginForm
+{
+}

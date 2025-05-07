@@ -1,0 +1,18 @@
+package frgp.utn.edu.ar.dao;
+
+import java.util.List;
+
+import frgp.utn.edu.ar.entidades.Medico;
+import frgp.utn.edu.ar.entidades.Turno;
+
+public interface IdaoTurno {
+	
+	public boolean Add(Turno turno);
+	public Turno ReadOne(int id);
+	public List<Turno> ReadAll();
+	public boolean Exist(String aux);
+	public boolean Update(Turno turno);
+	public boolean Delete(Turno turno);
+	public List<Turno> readAllFrom(Medico medico);
+
+}
