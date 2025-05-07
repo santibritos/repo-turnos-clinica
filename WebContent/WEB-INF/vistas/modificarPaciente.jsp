@@ -38,7 +38,7 @@
 				</fieldset>
 					<div class="botonera">
 					<br>
-					<input type="submit" value="Agregar"><a href="Pacientes.html" class="btnBorrar">Cancelar</a>
+					<input class="btn btnAzul bmediano" type="submit" value="Agregar"><a href="Pacientes.html" class="btn btnRojo bmediano">Cancelar</a>
 					</div>
 			</form>
 		</div>

@@ -37,7 +37,7 @@
         </li>
         <li class="sideItem">
           
-         <div class="sideLink"><img src="${pageContext.request.contextPath}/resources/imagenes/account_circle_24dp_D9D9D9_FILL0_wght400_GRAD0_opsz24.png" class="sideImg userImg"><span>${user.getUsuario()}</span></div> 
+         <div class="sideUser"><img src="${pageContext.request.contextPath}/resources/imagenes/account_circle_24dp_D9D9D9_FILL0_wght400_GRAD0_opsz24.png" class="sideImg userImg"><span>${user.getUsuario()}</span></div> 
           <a class="sideLink" href="login.html"><img src="${pageContext.request.contextPath}/resources/imagenes/logout_24dp_D9D9D9_FILL0_wght400_GRAD0_opsz24.png" class="sideImg"><span>Cerrar Sesion</span></a>
         </li>
       </ul>

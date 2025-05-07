@@ -124,6 +124,13 @@ span
     color: white;
     padding: 5px 30px;
 }
+.sideUser
+{
+    display: flex;
+    text-decoration: none;
+    color: white;
+    padding: 5px 30px;
+}
 .sideLink.focus
 {
     border-radius: 30px;

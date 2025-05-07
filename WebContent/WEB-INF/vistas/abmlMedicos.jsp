@@ -36,7 +36,7 @@ $(document).ready( function () {
 <div class="contenedor" >
 		<div>
 		<form action="AgregarMedico.html">
-			<input type=submit value= Agregar class="btnAgregar">
+			<input type=submit value= Agregar class="btn btnVerde bmediano">
 		</form>
 		</div>
 		<table id="tabla" class="display">
@@ -80,8 +80,8 @@ $(document).ready( function () {
 				            <td>${medico.especialidad.nombre}</td>
 				            <td>${medico.usuario.usuario}</td>
 							<td>
-		                        <a href = "modificarMedico${medico.legajo}.html" class = "btnModificar">Actualizar</a>
-		                     <a href = "bajaMedico${medico.legajo}.html" class = "btnBorrar">Delete</a><br/>
+		                        <a href = "modificarMedico${medico.legajo}.html" class = "btn btnAzul bchico">Actualizar</a>
+		                     <a href = "bajaMedico${medico.legajo}.html" class = "btn btnRojo bchico">Delete</a><br/>
 		                    </td>
 	     		</tr>
 	     		</c:if>

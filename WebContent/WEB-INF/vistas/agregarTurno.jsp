@@ -52,7 +52,8 @@ $(document).ready( function () {
 		</fieldset>
 			<div class="botonera">
 			<br>
-			<input type="submit" value="Agregar"><a href="turnos.html" class="btnBorrar">Cancelar</a>
+			<br>
+			<input class="btn btnAzul bmediano" type="submit" value="Agregar"><a href="turnos.html" class="btn btnRojo bmediano">Cancelar</a>
 			</div>
 		</form>
 			</div>
@@ -81,13 +82,13 @@ $(document).ready( function () {
 									</c:forEach>
 								</select>
 							<br>
-									<table id="tabla" class="display" style="max-width: 500px; max-height: 700px;">
+									<table id="tabla" class="display" style=" max-height: 700px;">
 				   				 <thead>
 				      					  <tr>
 				          			<th>Legajo</th>
 									<th>Nombre</th>
 									<th>Apellido</th>
-									<th>Horarios</th>
+									<th style="width: 200px">Horarios</th>
 									<th>Elegir</th>
 				      					 </tr>
 				   					 </thead>
@@ -108,7 +109,7 @@ $(document).ready( function () {
 							          		  </c:forEach>
 							       			     </td>
 											   	<td>
-					               				      <input type=submit value="Elegir" onclick="elegir('${medico.legajo}')">
+					               				      <input class="btn btnAzul bchico" type=submit value="Elegir" onclick="elegir('${medico.legajo}')">
 					                  		    </td>
 				     						</tr>
 				     								</c:if>

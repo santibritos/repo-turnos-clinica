@@ -29,7 +29,7 @@ $(document).ready( function () {
 <div class="contenedor">
 		<div>
 		<form action="altaTurno.html">
-			<input type=submit value= Agregar class="btnAgregar">
+			<input type=submit value= Agregar class="btn btnVerde bmediano">
 		</form>
 		</div>
 		<table id="tabla" class="display">
@@ -54,8 +54,8 @@ $(document).ready( function () {
 				            <td>${turno.medico.legajo}</td>
 				            <td>${turno.estado}</td>
 							<td>
-		                     <a href = "modificarTurno${turno.id}.html" class = "btnModificar">Actualizar</a>
-		                     <a href = "bajaTurno${turno.id}.html" class = "btnBorrar">Delete</a><br/>
+		                     <a href = "modificarTurno${turno.id}.html" class = "btn btnAzul bchico">Actualizar</a>
+		                     <a href = "bajaTurno${turno.id}.html" class = "btn btnRojo bchico">Delete</a><br/>
 		                    </td>
 	     		</tr>
 	     	</c:forEach>

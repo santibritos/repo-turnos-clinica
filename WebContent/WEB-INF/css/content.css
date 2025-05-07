@@ -14,59 +14,36 @@
     background-color:#e7e7e7;
     gap: 20px;
 }
-	.btnModificar
-	{
-		  background-color: blue; 
-		  border: none;
+.btn
+{
+		box-shadow: 0px 4px 5px -3px rgba(0,0,0, 0.6);
+		
+		height: 40px;
+	 	 border: none;
 		  color: white;
 		  text-align: center;
 		  text-decoration: none;
 		  display: inline-block;
 		  font-size: 16px;
-		margin-bottom: 3px;
-		width: 100px;
-		height: 40px;
-	}
-	.btnBorrar
-	{
-		 background-color: red; 
-		  border: none;
-		  color: white;
-		  text-align: center;
-		  text-decoration: none;
-		  display: inline-block;
-		  font-size: 16px;
-		margin-bottom: 3px;
-		width: 100px;
-		height: 40px;
-	}
-	.btnBuscar
-	{
-		height: 40px;
-		width: 85px;
-		background-color: #D0D0D0;
-	}
-		.btnAgregar
-	{
-	  background-color: #04AA6D; /* Green */
-		  border: none;
-		  color: white;
-		  text-align: center;
-		  text-decoration: none;
-		  display: inline-block;
-		  font-size: 16px;
-		margin-bottom: 10px;
-		width: 100px;
-		height: 40px;
-	}
+		  padding:10px
+}
+.bchico{width:100px;}
+.bmediano{width: 150px;}
+.botonera{display:flex;justify-content:center;gap:20px;}
+	.btn:hover{cursor: pointer;}
+	.btnAzul{background-color: var(--riceblue);}
+	.btnRojo{ background-color: #E30808; color: white; }
+	.btnBuscar{height: 40px;width: 85px;background-color: #D0D0D0;}
+	.btnVerde{background-color: #04AA6D; /* Green */}
+	
 	fieldset
 	{
-		width: 30vw;
 		display:flex;
 		flex-direction:column;
 		gap:5px;
 		background-color:white;
-		box-shadow: 0px 6px 7px -3px rgba(0,0,0, 0.6);
+		
+		padding:10px;
 	}
 	.container
 	{
@@ -75,7 +52,7 @@
 	}
 	.txt
 	{
-		width:20vw;
+		
 		height:1.5em;
 		font-size: 18px;
 	}

@@ -78,9 +78,9 @@
                 <label for="password">Contraseña</label>
                 <input type="password" class="txt" name="txtPassword" required />
             </fieldset>
+            <br>
 		<div class="botonera">
-		<br>
-		<input type="submit" value="Agregar"><a href="Medicos.html" class="btnBorrar">Cancelar</a>
+			<input type="submit" class="btn btnAzul bmediano" value="Agregar"><a href="Medicos.html" class="btnRojo btn bmediano">Cancelar</a>
 		</div>
 	</form>
 		</div>
