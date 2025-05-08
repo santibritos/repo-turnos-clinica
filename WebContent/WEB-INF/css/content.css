@@ -35,7 +35,12 @@
 	.btnRojo{ background-color: #E30808; color: white; }
 	.btnBuscar{height: 40px;width: 85px;background-color: #D0D0D0;}
 	.btnVerde{background-color: #04AA6D; /* Green */}
-	
+	.botonesHoras{ width: 100%;        /* ocupa todo el ancho de la columna */
+				  display: flex;
+				  flex-wrap: wrap;    /* permite que los botones se acomoden en varias filas */
+				  gap: 8px;           /* espacio entre botones */
+				  box-sizing: border-box;}
+					
 	fieldset
 	{
 		display:flex;
@@ -69,7 +74,9 @@
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 10px;
 	}
-	.uno{grid-column:1;}
+	.uno{grid-column:1;
+	overflow: hidden;
+  	word-wrap: break-word;}
 	.dos{grid-column:2;}
 	h1{font-weight: 400;}
 	

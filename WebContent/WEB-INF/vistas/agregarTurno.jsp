@@ -43,18 +43,19 @@ $(document).ready( function () {
 				<label>Dni del Paciente:</label>
 				<input type="text" name="txtDni" class="txt" >
 				<label>Legajo del Medico:</label>
-				<input type="text" id="txtLegajo" name="txtLegajo" class="txt" >
+				<input readonly type="text" id="txtLegajo" name="txtLegajo" class="txt" >
 				<label>Fecha del turno:</label>
 				<input id="datePaciente" type="date" name="txtFecha" class="txt" >
 				<label>Hora del turno: </label>
-				<input  type="time" name="txtHora" class="txt" >
-				<div id="div-horas"> </div>
-		</fieldset>
+				<input hidden type="time" name="txtHora" id="txtHora" class="txt" >
+				<div id="div-horas" class="botonesHoras"> </div>
+			<br>
 			<div class="botonera">
 			<br>
 			<br>
 			<input class="btn btnAzul bmediano" type="submit" value="Agregar"><a href="turnos.html" class="btn btnRojo bmediano">Cancelar</a>
 			</div>
+			</fieldset>
 		</form>
 			</div>
 			<!-- guardo los datos de los horarios -->
@@ -167,23 +168,54 @@ $(document).ready( function () {
 				  return horarios;
 				}
 			
+			function borrarAnterior(){
+				const anterior = document.getElementsByClassName('btnVerde');
+				if(anterior.length > 0){
+					anterior[0].classList.add('btnAzul');
+					anterior[0].classList.remove('btnVerde');
+				}
+			}
+			
+			function seleccionarHora(valor)
+			{
+				borrarAnterior();
+				const txt = document.getElementById('txtHora');
+				const elegido = document.getElementById('btn'+valor);
+				
+				elegido.classList.remove("btnAzul");
+				elegido.classList.add('btnVerde');
+				
+				txt.value = valor;
+				
+			}
+			
 			function crearBotones(entrada, salida)
 			{
 				const contenedor = document.getElementById('div-horas');
 				
 				contenedor.innerHTML = '';
 				
-				let valor = entrada;
 				
-				  const boton = document.createElement('button');
-				    boton.textContent = valor;
-				    boton.value = valor;
-				    boton.classList.add('boton-horario'); // Por si querés estilos
-				    contenedor.appendChild(boton);
+				const inicio = new Date("2025-01-01T"+entrada+":00");
+				const fin = new Date("2025-01-01T"+salida+":00");
 				
+				while(inicio < fin)
+					{
+						const hora = inicio.getHours().toString().padStart(2,"0");
+						const minutos = inicio.getMinutes().toString().padStart(2,"0");
+						const valor = hora+":"+minutos;
+						
+						const boton = document.createElement('button');
+						boton.type = "button";
+					    boton.textContent = valor;
+					    boton.value = valor;
+					    boton.classList.add('btn','btnAzul'); // Por si querés estilos
+					    boton.id = "btn"+valor;
+					    boton.onclick = () =>seleccionarHora(valor);
+					    contenedor.appendChild(boton);
+					    inicio.setMinutes(inicio.getMinutes()+10);
+					}
 				
-				console.log(entrada);
-				console.log(salida);
 			}
 			
 			// para detectar el cambio de fecha y dar los horarios correctos
