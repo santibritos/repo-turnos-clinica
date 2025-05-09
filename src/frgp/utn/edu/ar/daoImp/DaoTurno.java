@@ -1,7 +1,9 @@
 package frgp.utn.edu.ar.daoImp;
 
+import java.sql.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import frgp.utn.edu.ar.dao.IdaoTurno;
@@ -120,22 +122,31 @@ public class DaoTurno implements IdaoTurno{
 		} 
 	}
 
+	
 	@SuppressWarnings("unchecked")
-	public List<Turno> readAllFrom(Medico medico) {
-		ConfigHibernate config = new ConfigHibernate();
-		Session session = config.abrirConexion();
+	public List<Turno> traerPorFechaYmedico(Date fecha, Medico m)
+	{
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
 		
-		List<Turno> lista = (List<Turno>) session.createQuery("FROM Turno WHERE medico.legajo ="+medico.getLegajo()).list();
+		List<Turno> lista = null;
 		
-		System.out.println("READ ALL TURNOS ------");
-	    for (Turno reg : lista) {
-	    	if(reg.getEstado()!="cancelado")
-	    	{
-	    		System.out.println(reg.toString());
-	    	}
+		try
+		{	
+				String hql = " from Turno t where t.medico.legajo = :medicoId and t.fecha = :fecha";
+				Query query = session.createQuery(hql);
+				query.setParameter("medicoId", m.getLegajo());
+				query.setParameter("fecha", fecha);
+			 lista = (List<Turno>) query.list(); 
+			return lista;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return lista;
+		}finally {
+			ch.cerrarConexion();
 		}
-	    config.cerrarConexion();
-	    return lista;
+		
 	}
 
 

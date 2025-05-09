@@ -10,8 +10,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
+import frgp.utn.edu.ar.daoImp.DaoTurno;
 import frgp.utn.edu.ar.entidades.Horario;
 import frgp.utn.edu.ar.entidades.Medico;
+import frgp.utn.edu.ar.entidades.Turno;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.resources.Config;
 
@@ -50,6 +53,22 @@ public class app2 {
     	System.out.println("-------------------------------");
     	
     	System.out.println(m.getListaHorarios());
+    	
+    	Turno t = (Turno) appContext.getBean("beanTurno");
+    	DaoTurno dt = (DaoTurno) appContext.getBean("beanDaoTurno");
+    	
+    	List<Turno> lista = (List<Turno>) dt.traerPorFechaYmedico(java.sql.Date.valueOf("2024-11-11"),m);
+    	
+    	int i = 0;
+    	for(Turno reg : lista)
+    	{
+    		System.out.println("turno:"+i);
+    			System.out.println(reg.toString());
+    			i++;
+    	}
+    	
+    	
+    	
 		
     	((ConfigurableApplicationContext)(appContext)).close();
 	}

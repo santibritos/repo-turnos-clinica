@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import frgp.utn.edu.ar.entidades.Medico;
@@ -13,6 +14,6 @@ public interface IdaoTurno {
 	public boolean Exist(String aux);
 	public boolean Update(Turno turno);
 	public boolean Delete(Turno turno);
-	public List<Turno> readAllFrom(Medico medico);
+	public List<Turno> traerPorFechaYmedico(Date fecha,Medico medico);
 
 }

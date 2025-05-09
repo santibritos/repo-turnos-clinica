@@ -104,29 +104,17 @@ public class Turno implements Serializable{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	@Override
-	public String toString() {
-		if(paciente != null) {
-			return "Turno [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", observacion=" + observacion + ", estado="
-					+ estado + ", paciente=" + paciente.getApellido() + " " + paciente.getNombre() + " DNI(" + paciente.getDni()  + ")]";
-		}
-		if(medico != null) {
-			return "Turno [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", observacion=" + observacion + ", estado="
-					+ estado + ", medico=" + medico.getLegajo() + " " + medico.getApellido() + " " + medico.getNombre() + "]";
-		}
-		if(paciente != null && medico != null) {
-			return "Turno [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", observacion=" + observacion + ", estado="
-					+ estado + ", paciente=" + paciente.getApellido() + " " + paciente.getNombre() + " DNI(" + paciente.getDni() + ")"
-					+ ", medico=" + medico.getLegajo() + " " + medico.getApellido() + " " + medico.getNombre() +"]";
-		}
-		return "Turno [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", observacion=" + observacion + ", estado="
-				+ estado + "]";
-	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "Turno [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", observacion=" + observacion + ", estado="
+				+ estado + ", medico=" + medico + ", paciente=" + paciente + "]";
 	}
 	
 

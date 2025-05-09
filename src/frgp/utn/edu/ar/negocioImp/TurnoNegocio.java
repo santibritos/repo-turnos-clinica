@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.negocioImp;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,12 @@ public class TurnoNegocio implements IturnoNegocio{
 		this.dao = dao;
 	}
 
-	public List<Turno> readAllFrom(Medico m) {
+	@Override
+	public List<Turno> traerPorFechaYmedico(Date fecha, Medico m) {
 		// TODO Auto-generated method stub
-		return dao.readAllFrom(m);
+		return dao.traerPorFechaYmedico(fecha, m);
 	}
 
+	
 
 }
