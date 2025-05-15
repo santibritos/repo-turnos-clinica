@@ -48,10 +48,12 @@ public class UsuarioController {
 					
 			}else
 			{
-				if(u.equals(aux)==true)
+				if(u.equals(aux)==true&& aux.getPermiso().equals("cliente"))
 				{
-					//mav.addObject("username",username);
-					mav.setViewName("index");
+					session.setAttribute("medico", aux.getMedico());
+					session.setAttribute("user",aux);
+					mav.addObject("session",session);
+					mav.setViewName("vistaCliente");
 				}
 				else
 				{

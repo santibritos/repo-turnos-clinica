@@ -10,7 +10,7 @@
 
 <context:component-scan base-package="frgp.utn.edu.ar"></context:component-scan>
 
-<mvc:annotation-driven />
+<mvc:annotation-driven/>
 
 
 <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>

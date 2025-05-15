@@ -222,6 +222,7 @@ $(document).ready( function () {
 			const input = document.getElementById("datePaciente");
 
 			input.addEventListener("change", () => {
+				
 			  const fechaStr = input.value;	
 			  const fecha = new Date(fechaStr);
 
@@ -230,6 +231,11 @@ $(document).ready( function () {
 			  
 			  // traigo el id del medico
 			  const txtLegajo = document.getElementById('txtLegajo');
+			  
+				if (!txtLegajo.value) {
+			        alert("Primero debe elegir un médico.");
+			        return;
+			    }
 
 			  // los horarios del medico
 			  const horarios = obtenerHorariosMedico(txtLegajo.value);
@@ -241,6 +247,21 @@ $(document).ready( function () {
 						crearBotones(horario.entrada, horario.salida);
 					}
 			  });
+			
+			  console.log("Fecha seleccionada:", fechaStr);
+			  console.log("Legajo del médico:", txtLegajo.value);
+			 // const basePath = window.location.pathname.split('/')[1]; // e.g. "app-clinica-2"
+			 // const url = '/' + basePath +'verificarTurnos.html?medicoId=' + txtLegajo.value + '&fecha=' + fechaStr;
+			  //console.log("URL que se va a usar en fetch:", url);
+			   //
+			  fetch('pruebaFetch.html')
+			  .then(res =>{
+				  if(res === true){console.log('SAPE! ES TRUE')}
+			  })
+			  .then (res => console.log(res))
+			  .catch(error => console.log(error))
+			
+			
 			});
 			
 	</script>

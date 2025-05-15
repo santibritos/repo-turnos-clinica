@@ -38,8 +38,8 @@ $(document).ready( function () {
 						<th>Id</th>
 						<th>Fecha</th>
 						<th>Hora</th>
-						<th>Legajo Medico</th>
 						<th>Dni paciente</th>
+						<th>Legajo Medico</th>
 						<th>Estado</th>
 						<th>Acciones</th>
 	        </tr>

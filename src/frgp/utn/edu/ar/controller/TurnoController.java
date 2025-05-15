@@ -1,9 +1,14 @@
 package frgp.utn.edu.ar.controller;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import frgp.utn.edu.ar.entidades.Especialidad;
@@ -149,6 +156,54 @@ public class TurnoController {
 		neg.Update(t);
 		mav.addObject("listaTurnos",neg.ReadAll());
 		mav.setViewName("abmlTurnos");
+		return mav;
+	}
+	
+	@RequestMapping(value = "verificarTurnosmedico{id}fecha{fecha}.html", method = RequestMethod.GET, produces ="application/json")
+	@ResponseBody
+	public List<String> obtenerTurnosOcupados(
+			@PathVariable int medicoId,
+	        @PathVariable String fechaStr) {
+
+		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
+		
+	    List<Turno> turnos = neg.traerPorFechaYmedico(java.sql.Date.valueOf(fechaStr), mneg.ReadOne(medicoId));
+
+	    List<String> respuesta = new ArrayList<>();
+	    
+	    for (Turno t : turnos) {
+	    	
+	        respuesta.add(t.getHora().toString().substring(0,5));
+	    }
+	    
+	    for(String fila : respuesta)
+	    {
+	    	System.out.println(fila);
+	    }
+	    return respuesta;
+
+	}
+	
+	@RequestMapping(value="pruebaFetch.html",method=RequestMethod.GET)
+	@ResponseBody
+	public Boolean pruebaFetch()
+	{
+		System.out.println("dentro del backend en el controller ---------------------");
+		System.out.println("dentro del backend en el controller ---------------------");
+		System.out.println("dentro del backend en el controller ---------------------");
+		
+		return true;
+	}
+	
+	@RequestMapping(value="cargarWorkplace.html", method= RequestMethod.GET)
+	public ModelAndView turnosCliente(ModelAndView mav, HttpSession session)
+	{
+		System.out.println("en cargar workplace controller");
+		Medico medico = (Medico) session.getAttribute("medico");
+		System.out.println("MEDICO EN EL SESSION:"+medico.toString());
+		mav.addObject("listaTurnos",neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico));
+		
+		mav.setViewName("vistaCliente");
 		return mav;
 	}
 }

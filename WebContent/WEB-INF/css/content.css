@@ -80,3 +80,24 @@
 	.dos{grid-column:2;}
 	h1{font-weight: 400;}
 	
+	.columnas-workplace
+	{
+		display:grid;
+		grid-template-columns: 20% 1fr;
+	}
+	.cards
+	{
+		dislpay:flex;
+		flex-direction:column;
+		heigth: 100vh;
+		gap: 20px;
+	}
+	.card
+	{
+		display:grid;
+		grid-template-columns: 1f 100px;
+	}
+	
+	
+	
+	
