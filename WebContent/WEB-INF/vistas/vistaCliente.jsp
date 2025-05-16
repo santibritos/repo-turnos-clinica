@@ -7,6 +7,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
+
+	<script type="text/javascript">
+
+$(document).ready( function () {
+    $('#tabla').DataTable();
+    console.log('hola');
+} );
+
+</script>
 </head>
 <body>
 <%@include file="clienteSideBar.jsp"%>
@@ -15,16 +33,18 @@
 	
 	<div class="columnas-workplace">
 		<div class="contenedor cards uno">
+			
 			<c:forEach items="${listaTurnos}" var="turno">
 				<div class="card">
 					<div class="card-content uno">
 						<label>${turno.hora}</label>
 						<label>${turno.paciente.nombre} ${turno.paciente.apellido}</label>
 					</div>
-					<input class="dos" type="button" value="cargar">
+					<a type="text" name="txtId" href="cargarTurnoActual.html?id=${turno.id}">Cargar</a>
 				</div>
 				<br>
 			</c:forEach>
+			
 		</div>
 		
 		
@@ -32,6 +52,26 @@
 		
 		
 		<h1>PRUEBA PRUEBA</h1>
+		
+		<div>
+		<c:if test="${turnoActual != null}">
+			<table id="tabla" class="display">
+				<thead>
+					<tr>
+						<th>Paciente</th>
+						<th>Dni</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${turnoActual.paciente.nombre} ${turnoActual.paciente.apellido}</td>
+						<td>${turnoActual.paciente.dni}</td>
+					</tr>
+				</tbody>
+			
+			</table>
+			</c:if>
+		</div>
 		
 		</div>
 

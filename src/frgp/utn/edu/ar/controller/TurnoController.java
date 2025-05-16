@@ -203,6 +203,39 @@ public class TurnoController {
 		System.out.println("MEDICO EN EL SESSION:"+medico.toString());
 		mav.addObject("listaTurnos",neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico));
 		
+		
+		
+		mav.setViewName("vistaCliente");
+		return mav;
+	}
+	@RequestMapping(value="cargarTurnoActual.html", method= RequestMethod.GET)
+	public ModelAndView cargarTurnoActual(ModelAndView mav, HttpSession session,@RequestParam("id") Integer txtId)
+	{
+		List<Turno> lista = null;
+		Turno t = null;
+		Medico medico = null;
+		try {
+			 t = neg.ReadOne(txtId);
+			 medico = (Medico) session.getAttribute("medico");
+			lista  = neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico);
+			
+			for(Turno reg : lista)
+			{
+				System.out.println(reg.toString());
+				if(reg.getId() == t.getId())
+				{
+					System.out.println("Encontro el turno actual en la lista");
+					lista.remove(reg);
+				}
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		mav.addObject("turnoActual",t);
+		mav.addObject("listaTurnos",lista);
+		
 		mav.setViewName("vistaCliente");
 		return mav;
 	}
