@@ -206,12 +206,17 @@ $(document).ready( function () {
 						const valor = hora+":"+minutos;
 						
 						const boton = document.createElement('button');
+						
+					
 						boton.type = "button";
 					    boton.textContent = valor;
 					    boton.value = valor;
-					    boton.classList.add('btn','btnAzul'); // Por si querés estilos
+					   
+					    	boton.onclick = () =>seleccionarHora(valor);
+					    	 boton.classList.add('btn','btnAzul'); // Por si querés estilos
+
+					    //boton.classList.add('btn','btnAzul'); // Por si querés estilos
 					    boton.id = "btn"+valor;
-					    boton.onclick = () =>seleccionarHora(valor);
 					    contenedor.appendChild(boton);
 					    inicio.setMinutes(inicio.getMinutes()+10);
 					}
@@ -226,7 +231,7 @@ $(document).ready( function () {
 			  const fechaStr = input.value;	
 			  const fecha = new Date(fechaStr);
 
-			  const dias = [ "lunes", "martes", "miércoles", "jueves", "viernes", "sábado","domingo"];
+			  const dias = [ "lunes", "martes", "miercoles", "jueves", "viernes", "sábado","domingo"];
 			  const nombreDia = dias[fecha.getDay()];
 			  
 			  // traigo el id del medico
@@ -239,28 +244,36 @@ $(document).ready( function () {
 
 			  // los horarios del medico
 			  const horarios = obtenerHorariosMedico(txtLegajo.value);
+				
 
+			  
 			  horarios.forEach(horario =>{
+				  console.log('HORARIO DIA:'+ horario.dia);
 					if(horario.dia === nombreDia)
 					{
-						console.log(horario.dia);
 						crearBotones(horario.entrada, horario.salida);
 					}
 			  });
 			
-			  console.log("Fecha seleccionada:", fechaStr);
-			  console.log("Legajo del médico:", txtLegajo.value);
-			 // const basePath = window.location.pathname.split('/')[1]; // e.g. "app-clinica-2"
-			 // const url = '/' + basePath +'verificarTurnos.html?medicoId=' + txtLegajo.value + '&fecha=' + fechaStr;
-			  //console.log("URL que se va a usar en fetch:", url);
-			   //
-			  fetch('pruebaFetch.html')
-			  .then(res =>{
-				  if(res === true){console.log('SAPE! ES TRUE')}
-			  })
-			  .then (res => console.log(res))
-			  .catch(error => console.log(error))
-			
+
+			  
+				fetch('verificarTurnosMedico.html?medicoId='+txtLegajo.value+'&fechaStr='+fechaStr)
+				.then(response => response.text()) // Ojo: .text() porque devolvés un string
+				  .then(data => {
+				    console.log("Respuesta cruda:", data);
+				    
+				    // Si querés transformarlo a array:
+				   const turnosOcupados = JSON.parse(data.replaceAll("'", '"')); // por si devuelve con comillas simples
+				 	
+				   	turnosOcupados.forEach(turno =>{
+				   		
+				 		let btn = document.getElementById('btn'+turno);
+				 		btn.classList.remove('btnAzul');
+				 		btn.classList.add('btnRojo');
+				 		btn.disabled = true;
+				   	});
+				  })
+				  .catch(error => console.error('Error:', error));
 			
 			});
 			

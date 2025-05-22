@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,8 @@ import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.resources.Config;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -51,6 +55,34 @@ public class TurnoController {
      Especialidad e = (Especialidad)appContext.getBean("beanEspecialidad");
      EspecialidadNegocio eneg = (EspecialidadNegocio)appContext.getBean("beanEspecialidadNegocio");
    
+     
+ 	@RequestMapping(value = "verificarTurnosMedico.html", method = RequestMethod.GET)
+ 	@ResponseBody
+ 	public String obtenerTurnosOcupados(@RequestParam("medicoId") int medicoId, @RequestParam("fechaStr") String fechaStr) throws JsonProcessingException {
+
+ 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
+ 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
+ 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
+ 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
+ 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
+ 		
+ 	    List<Turno> turnos = neg.traerPorFechaYmedico(java.sql.Date.valueOf(fechaStr), mneg.ReadOne(medicoId));
+
+ 	    List<String> respuesta = new ArrayList<>();
+ 	    
+ 	    for (Turno t : turnos) {
+ 	    	
+ 	        respuesta.add(t.getHora().toString().substring(0,5));
+ 	    }
+ 	    
+ 	    for(String fila : respuesta)
+ 	    {
+ 	    	System.out.println(fila);
+ 	    }
+ 	    return new ObjectMapper().writeValueAsString(respuesta);
+
+ 	}
+ 	
 	
 	@RequestMapping("turnos.html")
 	public ModelAndView turnos(ModelAndView mav)
@@ -158,32 +190,7 @@ public class TurnoController {
 		mav.setViewName("abmlTurnos");
 		return mav;
 	}
-	
-	@RequestMapping(value = "verificarTurnosmedico{id}fecha{fecha}.html", method = RequestMethod.GET, produces ="application/json")
-	@ResponseBody
-	public List<String> obtenerTurnosOcupados(
-			@PathVariable int medicoId,
-	        @PathVariable String fechaStr) {
 
-		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
-		
-	    List<Turno> turnos = neg.traerPorFechaYmedico(java.sql.Date.valueOf(fechaStr), mneg.ReadOne(medicoId));
-
-	    List<String> respuesta = new ArrayList<>();
-	    
-	    for (Turno t : turnos) {
-	    	
-	        respuesta.add(t.getHora().toString().substring(0,5));
-	    }
-	    
-	    for(String fila : respuesta)
-	    {
-	    	System.out.println(fila);
-	    }
-	    return respuesta;
-
-	}
-	
 	@RequestMapping(value="pruebaFetch.html",method=RequestMethod.GET)
 	@ResponseBody
 	public Boolean pruebaFetch()

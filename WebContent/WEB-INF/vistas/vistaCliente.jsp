@@ -15,16 +15,6 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
 
 <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
-
-
-	<script type="text/javascript">
-
-$(document).ready( function () {
-    $('#tabla').DataTable();
-    console.log('hola');
-} );
-
-</script>
 </head>
 <body>
 <%@include file="clienteSideBar.jsp"%>
@@ -55,7 +45,7 @@ $(document).ready( function () {
 		
 		<div>
 		<c:if test="${turnoActual != null}">
-			<table id="tabla" class="display">
+			<table id="tabla">
 				<thead>
 					<tr>
 						<th>Paciente</th>
