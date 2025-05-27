@@ -251,4 +251,31 @@ public class TurnoController {
 		mav.setViewName("workplace");
 		return mav;
 	}
+	
+	@RequestMapping(value="guardarObservacion.html", method= RequestMethod.GET)
+	public ModelAndView guardarObservacion(ModelAndView mav, HttpSession session, Integer turnoActualId, String taObservacion)
+	{
+		List<Turno> lista = null;
+		Turno t = null;
+		Medico medico = null;
+		
+		try {
+			 t = neg.ReadOne(turnoActualId);
+			 t.setObservacion(taObservacion);
+			 t.setEstado("completado");
+			 medico = (Medico) session.getAttribute("medico");
+			 neg.Update(t);
+			 lista  = neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico);
+			 
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		mav.addObject("mensajeExito",true);
+		mav.addObject("listaTurnos",lista);
+		mav.setViewName("workplace");
+		
+		return mav;
+	}
 }

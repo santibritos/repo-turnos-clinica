@@ -133,10 +133,11 @@ public class DaoTurno implements IdaoTurno{
 		
 		try
 		{	
-				String hql = " from Turno t where t.medico.legajo = :medicoId and t.fecha = :fecha";
+				String hql = " from Turno t where t.medico.legajo = :medicoId and t.fecha = :fecha and t.estado = :estado";
 				Query query = session.createQuery(hql);
 				query.setParameter("medicoId", m.getLegajo());
 				query.setParameter("fecha", fecha);
+				query.setParameter("estado", "pendiente");
 			 lista = (List<Turno>) query.list(); 
 			return lista;
 		}catch(Exception e)
