@@ -212,7 +212,7 @@ public class TurnoController {
 		
 		
 		
-		mav.setViewName("vistaCliente");
+		mav.setViewName("workplace");
 		return mav;
 	}
 	@RequestMapping(value="cargarTurnoActual.html", method= RequestMethod.GET)
@@ -226,15 +226,20 @@ public class TurnoController {
 			 medico = (Medico) session.getAttribute("medico");
 			lista  = neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico);
 			
+			int i = 0;
+			int remover = 9999;
 			for(Turno reg : lista)
 			{
 				System.out.println(reg.toString());
 				if(reg.getId() == t.getId())
 				{
 					System.out.println("Encontro el turno actual en la lista");
-					lista.remove(reg);
+					remover = i;
 				}
+				i++;
 			}
+				lista.remove(remover);
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -243,7 +248,7 @@ public class TurnoController {
 		mav.addObject("turnoActual",t);
 		mav.addObject("listaTurnos",lista);
 		
-		mav.setViewName("vistaCliente");
+		mav.setViewName("workplace");
 		return mav;
 	}
 }

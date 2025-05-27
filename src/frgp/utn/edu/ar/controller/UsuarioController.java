@@ -53,7 +53,7 @@ public class UsuarioController {
 					session.setAttribute("medico", aux.getMedico());
 					session.setAttribute("user",aux);
 					mav.addObject("session",session);
-					mav.setViewName("vistaCliente");
+					mav.setViewName("workplace");
 				}
 				else
 				{

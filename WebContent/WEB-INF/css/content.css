@@ -83,13 +83,13 @@
 	.columnas-workplace
 	{
 		display:grid;
-		grid-template-columns: 20% 1fr;
+		grid-template-columns: 22% 1fr;
 	}
 	.cards
 	{
-		dislpay:flex;
+		displayy:flex;
 		flex-direction:column;
-		heigth: 100vh;
+		height: 100%;
 		gap: 20px;
 	}
 	.card
@@ -98,6 +98,69 @@
 		grid-template-columns: 1f 100px;
 	}
 	
-	
-	
+	.tabla
+	{
+		font-size: 20px;
+		min-width: 100%;
+		border-bottom:  2px solid var(--riceblue);
+		 border-collapse: collapse;
+	}
+	.tabla thead tr
+	{
+		background-color: var(--riceblue);
+		color: white;
+		text-align: left;
+	}
+	.tabla th, td
+	{
+		padding: 10px;
+	}
+	.tabla tbody tr td 
+	{
+		border: 1px solid black;
+	}
+	textarea
+	{
+		width: 100%;
+		min-height: 150px;
+		box-sizing: border-box;
+		font-size: 16px;
+		border: 1px solid gray;
+	}
+	.fondoAzul
+	{
+		background-color: var(--riceblue);
+		color: white;
+		text-align: left;
+		font-size: 20px;
+		padding: 10px;
+	}
+	.fondoCard
+	{
+		text-align: left;
+		font-size: 20px;
+		padding: 10px;
+		color: white;
+	}
+	.colorAzul{background-color: var(--riceblue);};
+	.colorMenosAzul{background-color: var(--indigo);}
+	.fondo100{width:100%;}
+	.contentLabel{font-size: 20px;}
+	.infoTurno{min-width: 200px;}
+	.btnCard
+	{
+	height: 100%;
+	text-align: center;
+	vertical-align: middle; 
+  	display: inline-block;
+	}
+	.cards .card:nth-child(odd)
+	{
+		background-color: var(--indigo);
+	}
+	.cards .card:nth-child(even) .btnCard
+	{
+		background-color: var(--indigo);
+	}
+
 	
