@@ -60,14 +60,14 @@
 				</tbody>
 			</table>
 			<div class="fondoAzul"><label class="contentLabel" for="taHistoria">Historia Clinica</label></div>
-			<textarea id="taHistoria"></textarea><br>
+			<textarea readOnly id="taHistoria">${historiaClinica}</textarea><br>
 			
 				<div class="fondoAzul fondo100">
 					<label class="contentLabel" for="taObservacion">Observacion</label>
 				</div>
 				<textarea id="taObservacion" name="taObservacion"></textarea><br><br>
 					<div class="botonera">
-					<input type="text" id="turnoActualId" name="turnoActualId"  value="${turnoActual.id}">
+					<input readonly hidden type="text" id="turnoActualId" name="turnoActualId"  value="${turnoActual.id}">
 						<input type="submit" class="btn btnAzul bmediano" value="Guardar">
 						<a href="cargarWorkplace.html" class="btn btnRojo bmediano">Cancelar</a>
 					</div>				
@@ -86,5 +86,6 @@
 
 	</div>
 </div>
+
 </body>
 </html>

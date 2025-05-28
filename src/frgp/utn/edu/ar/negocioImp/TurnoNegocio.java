@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import frgp.utn.edu.ar.dao.IdaoTurno;
 import frgp.utn.edu.ar.entidades.Medico;
+import frgp.utn.edu.ar.entidades.Paciente;
 import frgp.utn.edu.ar.entidades.Turno;
 import frgp.utn.edu.ar.negocio.IturnoNegocio;
 
@@ -66,6 +67,12 @@ public class TurnoNegocio implements IturnoNegocio{
 	public List<Turno> traerPorFechaYmedico(Date fecha, Medico m) {
 		// TODO Auto-generated method stub
 		return dao.traerPorFechaYmedico(fecha, m);
+	}
+
+	@Override
+	public String traerHistoriaClinica(Medico medico, Paciente paciente) {
+		// TODO Auto-generated method stub
+		return dao.traerHistoriaClinica(medico, paciente);
 	}
 
 	

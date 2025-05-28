@@ -221,10 +221,14 @@ public class TurnoController {
 		List<Turno> lista = null;
 		Turno t = null;
 		Medico medico = null;
+		String historiaClinica = null;
 		try {
 			 t = neg.ReadOne(txtId);
 			 medico = (Medico) session.getAttribute("medico");
 			lista  = neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico);
+			
+			historiaClinica = neg.traerHistoriaClinica(medico, t.getPaciente());
+			System.out.println("historia clinica en controller: "+historiaClinica);
 			
 			int i = 0;
 			int remover = 9999;
@@ -244,7 +248,7 @@ public class TurnoController {
 		{
 			e.printStackTrace();
 		}
-		
+		mav.addObject("historiaClinica",historiaClinica);
 		mav.addObject("turnoActual",t);
 		mav.addObject("listaTurnos",lista);
 		

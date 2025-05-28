@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import frgp.utn.edu.ar.dao.IdaoTurno;
 import frgp.utn.edu.ar.entidades.Medico;
+import frgp.utn.edu.ar.entidades.Paciente;
 import frgp.utn.edu.ar.entidades.Turno;
 
 public class DaoTurno implements IdaoTurno{
@@ -148,6 +149,36 @@ public class DaoTurno implements IdaoTurno{
 			ch.cerrarConexion();
 		}
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public String traerHistoriaClinica(Medico medico, Paciente paciente) {
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
+		List<Turno> lista = null;
+		
+		String respuesta = null;
+		
+		try
+		{
+			String hql = "from Turno t where t.medico.legajo = :medicoId and t.paciente.dni = :pacienteId";
+			Query query = session.createQuery(hql);
+			query.setParameter("medicoId", medico.getLegajo());
+			query.setParameter("pacienteId",paciente.getDni());
+			 lista = (List<Turno>) query.list(); 
+			respuesta ="";
+			 for(Turno turno : lista)
+			 {
+				 respuesta += turno.getFecha().toString() +" \n "+ turno.getObservacion()+"\n ";
+			 }
+			 
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("HISTORIA CLINICA EN EL DAO:"+respuesta);
+		return respuesta;
 	}
 
 
