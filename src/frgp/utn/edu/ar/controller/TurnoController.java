@@ -282,4 +282,21 @@ public class TurnoController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="traerHistoriaClinica.html", method=RequestMethod.GET)
+	@ResponseBody
+	public String traerHistoriaClinica(@RequestParam("medicoId") Integer medicoId, @RequestParam("pacienteId") String pacienteId)
+	{
+		String respuesta ="No se encontro historia clinica";
+		
+		try
+		{
+			respuesta = neg.traerHistoriaClinica(mneg.ReadOne(medicoId), pneg.ReadOne(pacienteId));
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return respuesta;
+	}
 }

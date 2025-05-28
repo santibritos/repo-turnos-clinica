@@ -20,6 +20,26 @@ $(document).ready( function () {
     $('#tabla').DataTable();
 } );
 </script>
+<style>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+</style>
 </head>
 <body>
 <%@include file="clienteSideBar.jsp"%>
@@ -54,7 +74,8 @@ $(document).ready( function () {
 				            <td>${paciente.correo_electronico}</td>
 				            <td>${paciente.telefono}</td>
 							<td>
-		                     <a href = "modificarPaciente${paciente.dni}.html" class = "btn btnAzul bmediano">Historia Clinica</a>
+		                     <a href="javascript:void(0);" class="btn btnAzul bmediano"
+  							 onclick="abrirModalHistoriaClinica('${paciente.dni}','${medico.legajo}')">Historia Clinica</a>
 		                    </td>
 	     		</tr>
 	     		</c:if>
@@ -62,7 +83,42 @@ $(document).ready( function () {
 	    </tbody>
 	</table>
 	</div>
-	
+	<!-- Modal -->
+<div id="modalHistoriaClinica" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h2>Historia Clínica</h2>
+     <br> <br>
+    <textarea id="textareaHistoria" rows="10" cols="60" readonly></textarea>
+    <br> <br>
+    <button class="btn btnAzul bchico" onclick="cerrarModal()">Cerrar</button>
+  </div>
 </div>
+
+
+</div>
+<script type="text/javascript">
+function abrirModalHistoriaClinica(dni, legajo) {
+  // Mostrar el modal
+  $('#modalHistoriaClinica').show();
+
+  // Llamar al backend para obtener la historia clínica
+  $.ajax({
+    url: 'traerHistoriaClinica.html', // endpoint 
+    method: 'GET',
+    data: { medicoId: legajo,pacienteId: dni },
+    success: function(respuesta) {
+      $('#textareaHistoria').val(respuesta);
+    },
+    error: function() {
+      $('#textareaHistoria').val("Error al cargar historia clínica.");
+    }
+  });
+}
+
+function cerrarModal() {
+  $('#modalHistoriaClinica').hide();
+  $('#textareaHistoria').val('');
+}
+</script>
 </body>
 </html>
