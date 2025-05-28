@@ -25,7 +25,7 @@
       </li>
         <li class="sideItem">
           
-          <a class="sideLink" href="Pacientes.html"><img src="${pageContext.request.contextPath}/resources/imagenes/groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="sideImg"><span>Pacientes</span></a>
+          <a class="sideLink" href="misPacientes.html"><img src="${pageContext.request.contextPath}/resources/imagenes/groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="sideImg"><span>Pacientes</span></a>
         </li>
         <li class="sideItem">
           

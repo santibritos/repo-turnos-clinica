@@ -2,6 +2,7 @@ package frgp.utn.edu.ar.negocio;
 
 import java.util.List;
 
+import frgp.utn.edu.ar.entidades.Medico;
 import frgp.utn.edu.ar.entidades.Paciente;
 
 public interface IpacienteNegocio {
@@ -12,5 +13,6 @@ public interface IpacienteNegocio {
 	public List<Paciente> ReadAll();
 	public boolean Delete(Paciente paciente);
 	public boolean Update(Paciente paciente);
+	public List<Paciente> traerPorMedico(Medico medico);
 
 }

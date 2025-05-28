@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proyecto Clinicae</title>
+<title>Modificar Turno</title>
 </head>
 <body>
 		<%@ include file="adminSideBar.jsp" %>

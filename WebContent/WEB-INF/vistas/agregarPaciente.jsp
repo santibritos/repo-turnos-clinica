@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proyecto Clinica</title>
+<title>Agregar Paciente</title>
 </head>
 <body>
 <%@include file="adminSideBar.jsp"%>

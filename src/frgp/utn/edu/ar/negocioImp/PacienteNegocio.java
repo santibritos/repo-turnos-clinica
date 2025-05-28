@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import frgp.utn.edu.ar.dao.IdaoPaciente;
 import frgp.utn.edu.ar.daoImp.DaoPaciente;
+import frgp.utn.edu.ar.entidades.Medico;
 import frgp.utn.edu.ar.entidades.Paciente;
 import frgp.utn.edu.ar.negocio.IpacienteNegocio;
 
@@ -72,6 +73,11 @@ public class PacienteNegocio implements IpacienteNegocio{
 	public boolean Update(Paciente paciente) {
 		// TODO Auto-generated method stub
 		return daoPaciente.Update(paciente);
+	}
+	@Override
+	public List<Paciente> traerPorMedico(Medico medico) {
+		// TODO Auto-generated method stub
+		return daoPaciente.traerPorMedico(medico);
 	}
 	
 

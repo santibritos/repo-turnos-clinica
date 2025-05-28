@@ -3,6 +3,8 @@ package frgp.utn.edu.ar.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import frgp.utn.edu.ar.entidades.Medico;
 import frgp.utn.edu.ar.entidades.Paciente;
 import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.resources.Config;
@@ -101,4 +104,21 @@ public class PacienteController {
     	mav.addObject("listaPacientes",listaPacientes);
     	return mav;
     }
+	@RequestMapping("misPacientes.html")
+	public ModelAndView misPacientes(ModelAndView mav,HttpSession session)
+	{
+		Medico medico = (Medico) session.getAttribute("medico");
+		try
+		{
+			List<Paciente> lista = neg.traerPorMedico(medico);
+			mav.addObject("listaPacientes",lista);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		mav.setViewName("misPacientes");
+		return mav;
+	}
+	
 }

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-      <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pacientes</title>
+<title>Mis Pacientes</title>
 <script
   src="https://code.jquery.com/jquery-3.7.1.js"
   integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -21,16 +21,12 @@ $(document).ready( function () {
 } );
 </script>
 </head>
-<%@include file="adminSideBar.jsp" %>
-
-	<div class="main-content">
-		<h1 class="contenedor">PACIENTES</h1>
-<div class="contenedor">
-		<div>
-		<form action="altaPaciente.html">
-			<input type=submit value= Agregar class="btn btnVerde bmediano">
-		</form>
-		</div>
+<body>
+<%@include file="clienteSideBar.jsp"%>
+<div class="main-content">
+	<h1 class="contenedor">Mis Pacientes</h1>
+	<div class="contenedor">
+	
 		<table id="tabla" class="display">
 	    <thead>
 	        <tr>
@@ -58,16 +54,15 @@ $(document).ready( function () {
 				            <td>${paciente.correo_electronico}</td>
 				            <td>${paciente.telefono}</td>
 							<td>
-		                     <a href = "modificarPaciente${paciente.dni}.html" class = "btn btnAzul bchico">Actualizar</a>
-		                     <a href = "bajaPaciente${paciente.dni}.html" class = "btn btnRojo bchico">Delete</a><br/>
+		                     <a href = "modificarPaciente${paciente.dni}.html" class = "btn btnAzul bmediano">Historia Clinica</a>
 		                    </td>
 	     		</tr>
 	     		</c:if>
 	     	</c:forEach>
 	    </tbody>
 	</table>
-		</div>
 	</div>
-<body>
+	
+</div>
 </body>
 </html>

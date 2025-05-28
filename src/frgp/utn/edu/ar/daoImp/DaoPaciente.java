@@ -2,10 +2,13 @@ package frgp.utn.edu.ar.daoImp;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import frgp.utn.edu.ar.dao.IdaoPaciente;
+import frgp.utn.edu.ar.entidades.Medico;
 import frgp.utn.edu.ar.entidades.Paciente;
+import frgp.utn.edu.ar.entidades.Turno;
 
 public class DaoPaciente implements IdaoPaciente {
 
@@ -141,6 +144,27 @@ public class DaoPaciente implements IdaoPaciente {
 			config.cerrarConexion();
 		}
 	
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Paciente> traerPorMedico(Medico medico) {
+		ConfigHibernate config = new ConfigHibernate();
+		Session session = config.abrirConexion();
+		List<Paciente> lista = null;
+		
+		try
+		{
+			String hql = "SELECT DISTINCT t.paciente FROM Turno t where t.medico.legajo = :medicoId and t.paciente.estado = true";
+			Query query = session.createQuery(hql);
+			query.setParameter("medicoId", medico.getLegajo());
+			lista = (List<Paciente>) query.list();
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 }

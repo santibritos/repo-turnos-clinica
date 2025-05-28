@@ -52,7 +52,6 @@ public class PaginaController {
 		mav.setViewName("file2");
 		return mav;
 	}
-	
-	
+
 
 }

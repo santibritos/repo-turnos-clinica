@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Workplace</title>
 
 <script
   src="https://code.jquery.com/jquery-3.7.1.js"
