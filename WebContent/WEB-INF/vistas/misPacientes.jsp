@@ -74,8 +74,8 @@ $(document).ready( function () {
 				            <td>${paciente.correo_electronico}</td>
 				            <td>${paciente.telefono}</td>
 							<td>
-		                     <a href="javascript:void(0);" class="btn btnAzul bmediano"
-  							 onclick="abrirModalHistoriaClinica('${paciente.dni}','${medico.legajo}')">Historia Clinica</a>
+		                     <button class="btn btnAzul bmediano"
+  							 onclick="abrirModalHistoriaClinica('${paciente.dni}','${medico.legajo}')">Historia Clinica</button>
 		                    </td>
 	     		</tr>
 	     		</c:if>

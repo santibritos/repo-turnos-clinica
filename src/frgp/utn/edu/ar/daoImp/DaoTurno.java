@@ -181,5 +181,38 @@ public class DaoTurno implements IdaoTurno{
 		return respuesta;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> turnosPorEspecialidadYfecha(Date inicio, Date fin) {
+
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
+		
+		List<Object[]> lista = null;
+		
+		try
+		{
+			String hql = "SELECT COUNT(*) as turnos, e.nombre FROM Turno t join t.medico m join m.especialidad e "
+					+ "where t.fecha between :fechaInicio and :fechaFin group by e.nombre";
+			Query query = session.createQuery(hql);
+			query.setParameter("fechaInicio", inicio);
+			query.setParameter("fechaFin", fin);
+			lista = (List<Object[]>) query.list();
+			
+			System.out.println("----- TRAER CANT TURNOS POR ESPECIALIDAD ENTRE FECHAS: "+inicio.toString()+" - "+fin.toString()+" -------");
+			for(Object[] row : lista)
+			{
+				System.out.println(row[0]+" "+row[1]);
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		return lista;
+	}
+
 
 }

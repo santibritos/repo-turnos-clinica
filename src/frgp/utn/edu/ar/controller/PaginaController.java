@@ -1,10 +1,16 @@
 package frgp.utn.edu.ar.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class PaginaController {
@@ -52,6 +58,5 @@ public class PaginaController {
 		mav.setViewName("file2");
 		return mav;
 	}
-
 
 }

@@ -3,6 +3,7 @@ package frgp.utn.edu.ar.controller;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -298,5 +299,37 @@ public class TurnoController {
 		}
 		
 		return respuesta;
+	}
+	
+	@SuppressWarnings("null")
+	@RequestMapping("informe.html")
+	public ModelAndView informe(ModelAndView mav) throws JsonProcessingException
+	{
+		List<String> especialidades = new ArrayList<>();
+		List<Long> turnos = new ArrayList<>();
+		try
+		{
+			List<Object[]> lista = neg.turnosPorEspecialidadYfecha(java.sql.Date.valueOf("2025-05-09"),java.sql.Date.valueOf(LocalDate.now()));
+			
+			for(Object[] row : lista)
+			{
+				especialidades.add((String) row[1]);
+				turnos.add((Long) row[0]);
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+			
+			/*List<String> dias = Arrays.asList("Lunes", "Martes", "Miercoles");
+	        List<Integer> turnos = Arrays.asList(5, 8, 3);*/
+			
+	        ObjectMapper mapper = new ObjectMapper();
+	        mav.addObject("labels", mapper.writeValueAsString(especialidades));
+	        mav.addObject("data",  mapper.writeValueAsString(turnos));
+		mav.setViewName("informe");
+		return mav;
 	}
 }

@@ -21,7 +21,7 @@
    
     <ul class="sidebar">
       <li class="sideItem">
-        <a class="sideLink" href="traerFile2.html"><img src="${pageContext.request.contextPath}/resources/imagenes/dashboard_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="sideImg"><span>Informe</span></a>
+        <a class="sideLink" href="informe.html"><img src="${pageContext.request.contextPath}/resources/imagenes/dashboard_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="sideImg"><span>Informe</span></a>
       </li>
         <li class="sideItem">
           

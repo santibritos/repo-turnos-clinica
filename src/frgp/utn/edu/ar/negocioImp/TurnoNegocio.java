@@ -75,6 +75,12 @@ public class TurnoNegocio implements IturnoNegocio{
 		return dao.traerHistoriaClinica(medico, paciente);
 	}
 
+	@Override
+	public List<Object[]> turnosPorEspecialidadYfecha(Date inicio, Date fin) {
+		// TODO Auto-generated method stub
+		return dao.turnosPorEspecialidadYfecha(inicio, fin);
+	}
+
 	
 
 }
