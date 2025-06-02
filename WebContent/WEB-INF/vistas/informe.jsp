@@ -22,6 +22,7 @@
 			<option value="15">Ultimos 15 dias</option>
 			<option value="30">Ultimos 30 dias</option>
 			<option value="365">Año actual</option>
+			<option value="730">Año pasado</option>
 			</select>
 			</div>
 			

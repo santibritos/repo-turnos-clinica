@@ -214,5 +214,35 @@ public class DaoTurno implements IdaoTurno{
 		return lista;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> traerPorEspecialidadYaño(Integer year) {
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
+		
+		List<Object[]> lista = null;
+		
+		try
+		{
+			String hql = "SELECT COUNT(*) as turnos, e.nombre as nombre FROM Turno t join t.medico m join m.especialidad e"
+					+ " where year(t.fecha) = :year group by e.nombre ";
+			Query query = session.createQuery(hql);
+			query.setParameter("year", year);
+			lista = (List<Object[]>) query.list();
+			
+			System.out.println("----- TRAER CANT TURNOS POR ESPECIALIDAD DEL AÑO: "+year+" -------");
+			for(Object[] row : lista)
+			{
+				System.out.println(row[0]+" "+row[1]);
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+
 
 }

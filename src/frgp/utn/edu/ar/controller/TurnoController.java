@@ -292,14 +292,25 @@ public class TurnoController {
 	public String devuelveTurnosHaceXdias(@RequestParam("dias") Integer dias) throws JsonProcessingException
 	{
 		System.out.println("EN DEVOLVER TURNOS POR X DIAS");
-		String respuesta = "";
+		
 		List<Object[]> lista = new ArrayList<>();
 		try 
 		{
 			LocalDate hoy = LocalDate.now();
 			LocalDate haceXdias = hoy.minusDays(dias);
 			
-			 lista = neg.turnosPorEspecialidadYfecha(java.sql.Date.valueOf(haceXdias),java.sql.Date.valueOf(hoy));
+			switch(dias)
+			{
+			case 365:
+				lista = neg.traerPorEspecialidadYaño(LocalDate.now().getYear());
+				break;
+			case 730:
+				lista = neg.traerPorEspecialidadYaño(LocalDate.now().getYear()-1);
+				break;
+			 default:
+				 lista = neg.turnosPorEspecialidadYfecha(java.sql.Date.valueOf(haceXdias),java.sql.Date.valueOf(hoy));
+				break;
+				}
 			 
 		}catch(Exception e)
 		{

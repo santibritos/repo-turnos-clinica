@@ -81,6 +81,12 @@ public class TurnoNegocio implements IturnoNegocio{
 		return dao.turnosPorEspecialidadYfecha(inicio, fin);
 	}
 
+	@Override
+	public List<Object[]> traerPorEspecialidadYaño(Integer año) {
+		// TODO Auto-generated method stub
+		return dao.traerPorEspecialidadYaño(año);
+	}
+
 	
 
 }
