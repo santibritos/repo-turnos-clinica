@@ -60,12 +60,6 @@ public class TurnoController {
  	@RequestMapping(value = "verificarTurnosMedico.html", method = RequestMethod.GET)
  	@ResponseBody
  	public String obtenerTurnosOcupados(@RequestParam("medicoId") int medicoId, @RequestParam("fechaStr") String fechaStr) throws JsonProcessingException {
-
- 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
- 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
- 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
- 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
- 		System.out.println("--------- EN CONTROLLER POR FECHA Y MEDICO --------- ");
  		
  	    List<Turno> turnos = neg.traerPorFechaYmedico(java.sql.Date.valueOf(fechaStr), mneg.ReadOne(medicoId));
 
@@ -100,47 +94,6 @@ public class TurnoController {
     	mav.addObject("especialidades",especialidades);
 		
 		List<Medico> listaMedicos = mneg.ReadAll();
-		
-	
-	/*	 List<MedicoDTO> medicoDTOs = new ArrayList<>();
-
-		 for (Medico medico : listaMedicos) {
-		     List<HorarioDTO> horariosDTO = new ArrayList<>();
-
-		     for (Horario horario : medico.getListaHorarios()) {
-		    	 int idHorario = horario.getId();
-		         String diaNombre = horario.getDia().getDia(); // ej: "Lunes"
-		         String entradaStr = horario.getEntrada() != null ? horario.getEntrada().toString().substring(0, 5) : null;
-		         String salidaStr = horario.getSalida() != null ? horario.getSalida().toString().substring(0, 5) : null;
-
-		         horariosDTO.add(new HorarioDTO(idHorario,diaNombre, entradaStr, salidaStr));
-		     }
-
-		     MedicoDTO dto = new MedicoDTO(
-		         medico.getLegajo(),
-		         medico.getNombre(),
-		         medico.getApellido(),
-		         horariosDTO
-		     );
-
-		     medicoDTOs.add(dto);
-		 }
-		 
-		 
-		 	try {
-			ObjectMapper mapper = new ObjectMapper();
-	        String medicosJson = mapper.writeValueAsString(medicoDTOs);
-	        mav.addObject("medicosJson",medicosJson);
-		}catch(Exception e) {
-			System.out.println("HUBO ERROR------------");
-			e.printStackTrace();
-			 mav.addObject("medicosJson",null);
-		}
-		
-		
-		 */
-		 
-		 
 		 mav.addObject("listaMedicos",listaMedicos);
 		 
 		
@@ -301,7 +254,6 @@ public class TurnoController {
 		return respuesta;
 	}
 	
-	@SuppressWarnings("null")
 	@RequestMapping("informe.html")
 	public ModelAndView informe(ModelAndView mav) throws JsonProcessingException
 	{
@@ -309,7 +261,11 @@ public class TurnoController {
 		List<Long> turnos = new ArrayList<>();
 		try
 		{
-			List<Object[]> lista = neg.turnosPorEspecialidadYfecha(java.sql.Date.valueOf("2025-05-09"),java.sql.Date.valueOf(LocalDate.now()));
+			
+			LocalDate hoy = LocalDate.now();
+			LocalDate hace15dias = hoy.minusDays(15);
+			
+			List<Object[]> lista = neg.turnosPorEspecialidadYfecha(java.sql.Date.valueOf(hace15dias),java.sql.Date.valueOf(hoy));
 			
 			for(Object[] row : lista)
 			{
@@ -320,9 +276,7 @@ public class TurnoController {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-		}
-			
-			
+		}	
 			/*List<String> dias = Arrays.asList("Lunes", "Martes", "Miercoles");
 	        List<Integer> turnos = Arrays.asList(5, 8, 3);*/
 			
@@ -331,5 +285,28 @@ public class TurnoController {
 	        mav.addObject("data",  mapper.writeValueAsString(turnos));
 		mav.setViewName("informe");
 		return mav;
+	}
+	
+	@RequestMapping(value="devuelveTurnosHaceXdias.html", method=RequestMethod.GET)
+	@ResponseBody
+	public String devuelveTurnosHaceXdias(@RequestParam("dias") Integer dias) throws JsonProcessingException
+	{
+		System.out.println("EN DEVOLVER TURNOS POR X DIAS");
+		String respuesta = "";
+		List<Object[]> lista = new ArrayList<>();
+		try 
+		{
+			LocalDate hoy = LocalDate.now();
+			LocalDate haceXdias = hoy.minusDays(dias);
+			
+			 lista = neg.turnosPorEspecialidadYfecha(java.sql.Date.valueOf(haceXdias),java.sql.Date.valueOf(hoy));
+			 
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(lista);
 	}
 }
