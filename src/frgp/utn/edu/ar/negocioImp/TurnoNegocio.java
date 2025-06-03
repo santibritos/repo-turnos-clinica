@@ -87,6 +87,12 @@ public class TurnoNegocio implements IturnoNegocio{
 		return dao.traerPorEspecialidadYaño(año);
 	}
 
+	@Override
+	public List<Object[]> traerPorEstadoYaño(String estado, Integer año) {
+		// TODO Auto-generated method stub
+		return dao.traerPorEstadoYaño(estado, año);
+	}
+
 	
 
 }

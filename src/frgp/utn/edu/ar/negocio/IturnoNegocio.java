@@ -19,5 +19,6 @@ public interface IturnoNegocio {
 	public String traerHistoriaClinica(Medico medico, Paciente paciente);
 	public List<Object[]> turnosPorEspecialidadYfecha(Date inicio, Date fin);
 	public List<Object[]>traerPorEspecialidadYaño(Integer año);
+	public List<Object[]>traerPorEstadoYaño(String estado,Integer año);
 
 }

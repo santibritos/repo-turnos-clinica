@@ -244,5 +244,39 @@ public class DaoTurno implements IdaoTurno{
 		return lista;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> traerPorEstadoYaño(String estado, Integer year) {
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
+		
+		List<Object[]> lista = null;
+		
+		try 
+		{
+			String hql = "select count(*), month(t.fecha) from Turno t where year(t.fecha) = :year group by month(t.fecha)";
+			Query query = session.createQuery(hql);
+			if(estado != "todos")
+			{
+				hql  = "select count(*), month(t.fecha) as mes from Turno t where year(t.fecha) = :year and t.estado = :estado group by mes";
+				query.setParameter("estado", estado);
+			}
+			
+			query.setParameter("year", year);
+			
+			lista = (List<Object[]>) query.list();
+			
+			System.out.println("----- TRAER CANT TURNOS POR AÑO AÑO: "+year+" y estado: "+estado);
+			for(Object[] row : lista)
+			{
+				System.out.println(row[0]+" "+row[1]);
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
 
 }

@@ -31,9 +31,9 @@
 			</div>
 		</div>
 		
-		<div  style="width: 500px; height: 400px;" class="contenedor">
-			<h2>Grafico Barra</h2>
-			<canvas id="gBarra" width="400px" height="200px"></canvas>
+		<div  style="width: 700px; height: 400px;" class="contenedor">
+			<h4>Turnos totales:</h4>
+			<canvas id="gLinea" width="400px" height="200px"></canvas>
 		</div>
 	
 
@@ -97,23 +97,57 @@ options.addEventListener('change',()=>{
 </script>
 
 <script>
-    const ctx2 = document.getElementById('gBarra').getContext('2d');
-    const gBarra = new Chart(ctx2, {
-        type: 'bar',
+    const ctx2 = document.getElementById('gLinea').getContext('2d');
+    const gLinea = new Chart(ctx2, {
+        type: 'line',
         data: {
-            labels: ${labels},
-            datasets: [{
-                label: 'Cantidad de turnos',
-                data: ${data},
-            }]
+          labels: ${meses},
+          datasets: [
+            {
+              label: 'Año Pasado',
+              data: ${turnosAñoPasado},
+              borderColor: 'rgba(54, 162, 235, 1)',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              tension: 0.3,
+              fill: false
+            },
+            {
+              label: 'Año Actual',
+              data: ${turnosAñoActual},
+              borderColor: 'rgba(255, 99, 132, 1)',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              tension: 0.3,
+              fill: false
+            }
+          ]
         },
         options: {
-            scales: {
-                y: { beginAtZero: true }
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Comparativa de Ventas Mensuales'
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false
+            },
+            legend: {
+              position: 'top'
             }
+          },
+          interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-    });
-    
+      });
 </script>
 </body>
 </html>

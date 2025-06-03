@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.controller;
 
+import java.lang.reflect.Array;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -259,6 +260,11 @@ public class TurnoController {
 	{
 		List<String> especialidades = new ArrayList<>();
 		List<Long> turnos = new ArrayList<>();
+		
+		List<String> meses = Arrays.asList("Enero", "Febrero", "Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+		List<Integer>turnosAñoActual =  Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0);
+		List<Integer>turnosAñoPasado =  Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0);
+		
 		try
 		{
 			
@@ -273,6 +279,23 @@ public class TurnoController {
 				turnos.add((Long) row[0]);
 			}
 			
+			List<Object[]> lista2 = neg.traerPorEstadoYaño("todos", LocalDate.now().getYear());
+			for(Object[] row : lista2)
+			{
+				int mes = ((Number) row[1]).intValue();     // índice 0: mes
+			    int cantidad = ((Number) row[0]).intValue(); // índice 1: cantidad
+			    turnosAñoActual.set(mes, cantidad);
+			}
+			
+			List<Object[]> lista3 = neg.traerPorEstadoYaño("todos", LocalDate.now().getYear()-1);
+			for(Object[] row : lista3)
+			{
+					int mes = ((Number) row[1]).intValue();
+				    int cantidad = ((Number) row[0]).intValue();
+				    turnosAñoPasado.set(mes, cantidad);
+			}
+			
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -281,9 +304,16 @@ public class TurnoController {
 	        List<Integer> turnos = Arrays.asList(5, 8, 3);*/
 			
 	        ObjectMapper mapper = new ObjectMapper();
+	        
+	        
 	        mav.addObject("labels", mapper.writeValueAsString(especialidades));
 	        mav.addObject("data",  mapper.writeValueAsString(turnos));
-		mav.setViewName("informe");
+	        
+	        mav.addObject("meses",mapper.writeValueAsString(meses));
+	        mav.addObject("turnosAñoPasado",mapper.writeValueAsString(turnosAñoPasado));
+	        mav.addObject("turnosAñoActual",mapper.writeValueAsString(turnosAñoActual));
+	        
+	        mav.setViewName("informe");
 		return mav;
 	}
 	
@@ -319,5 +349,30 @@ public class TurnoController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(lista);
+	}
+	
+	public String devuelveTurnosPorEstadoYyear(@RequestParam("estado")String estado) throws JsonProcessingException
+	{
+		System.out.println("EN DEVUELVE TURNOS POR ESTADO Y AÑO CONTROLLER");
+		List<Object[]> lista = new ArrayList<>();
+		
+		try
+		{
+			switch(estado)
+			{
+			case "cancelado":
+				break;
+			case "completado":
+				break;
+			default:
+				break;
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(lista); 
 	}
 }
