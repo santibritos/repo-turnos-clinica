@@ -33,6 +33,12 @@
 		
 		<div  style="width: 700px; height: 400px;" class="contenedor">
 			<h4>Turnos totales:</h4>
+			<select id="selectLinea">
+			<option value="todos">Todos</option>
+			<option value="cancelado">Cancelados</option>
+			<option value="pendiente">Pendientes</option>
+			<option value="completado">Completados</option>
+			</select>
 			<canvas id="gLinea" width="400px" height="200px"></canvas>
 		</div>
 	
@@ -98,13 +104,15 @@ options.addEventListener('change',()=>{
 
 <script>
     const ctx2 = document.getElementById('gLinea').getContext('2d');
+    const añoActual = new Date().getFullYear();
+	const añoPasado = añoActual-1;
     const gLinea = new Chart(ctx2, {
         type: 'line',
         data: {
           labels: ${meses},
           datasets: [
             {
-              label: 'Año Pasado',
+              label: añoPasado,
               data: ${turnosAñoPasado},
               borderColor: 'rgba(54, 162, 235, 1)',
               backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -112,7 +120,7 @@ options.addEventListener('change',()=>{
               fill: false
             },
             {
-              label: 'Año Actual',
+              label: añoActual,
               data: ${turnosAñoActual},
               borderColor: 'rgba(255, 99, 132, 1)',
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -148,6 +156,28 @@ options.addEventListener('change',()=>{
           }
         }
       });
+    
+    const selectLinea = document.getElementById('selectLinea');
+    
+    selectLinea.addEventListener('change', () => {
+    	
+    	console.log(añoActual);
+    	console.log(añoPasado);
+    	  Promise.all([
+    	    fetch('devuelveTurnosPorEstadoYyear.html?estado=' + selectLinea.value + '&year='+añoActual).then(r => r.json()),
+    	    fetch('devuelveTurnosPorEstadoYyear.html?estado=' + selectLinea.value + '&year='+añoPasado).then(r => r.json())
+    	  ])
+    	  .then(([datosActuales, datosPasados]) => {
+    	    console.log('data de glinea año Actual: ' + datosActuales);
+    	    console.log('data de glinea año Pasado: ' + datosPasados);
+
+    	    gLinea.data.datasets[0].data = datosPasados;
+    	    gLinea.data.datasets[1].data = datosActuales;
+    	    gLinea.update();
+    	  })
+    	  .catch(error => console.error('Error al obtener los datos:', error));
+    	});
+    
 </script>
 </body>
 </html>

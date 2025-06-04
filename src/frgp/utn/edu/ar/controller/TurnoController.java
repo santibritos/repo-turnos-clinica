@@ -351,20 +351,55 @@ public class TurnoController {
 		return mapper.writeValueAsString(lista);
 	}
 	
-	public String devuelveTurnosPorEstadoYyear(@RequestParam("estado")String estado) throws JsonProcessingException
+	@RequestMapping(value="devuelveTurnosPorEstadoYyear.html", method = RequestMethod.GET)
+	@ResponseBody
+	public String devuelveTurnosPorEstadoYyear(@RequestParam("estado")String estado,@RequestParam("year")Integer year) throws JsonProcessingException
 	{
 		System.out.println("EN DEVUELVE TURNOS POR ESTADO Y AÑO CONTROLLER");
 		List<Object[]> lista = new ArrayList<>();
+		List<Integer>turnosAño =  Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0);
+		
+		System.out.println("estado: "+estado+" year: "+year);
 		
 		try
 		{
 			switch(estado)
 			{
 			case "cancelado":
+				lista = neg.traerPorEstadoYaño("cancelado", year);
+				for(Object[] row : lista)
+				{
+					int mes = ((Number) row[1]).intValue();     // índice 0: mes
+				    int cantidad = ((Number) row[0]).intValue(); // índice 1: cantidad
+				    turnosAño.set(mes, cantidad);
+				}
 				break;
 			case "completado":
+				lista = neg.traerPorEstadoYaño("completado", year);
+				for(Object[] row : lista)
+				{
+					int mes = ((Number) row[1]).intValue();     // índice 0: mes
+				    int cantidad = ((Number) row[0]).intValue(); // índice 1: cantidad
+				    turnosAño.set(mes, cantidad);
+				}
+				break;
+			case "pendiente":
+				lista = neg.traerPorEstadoYaño("completado", year);
+				for(Object[] row : lista)
+				{
+					int mes = ((Number) row[1]).intValue();     // índice 0: mes
+				    int cantidad = ((Number) row[0]).intValue(); // índice 1: cantidad
+				    turnosAño.set(mes, cantidad);
+				}
 				break;
 			default:
+				lista = neg.traerPorEstadoYaño("todos", year);
+				for(Object[] row : lista)
+				{
+					int mes = ((Number) row[1]).intValue();     // índice 0: mes
+				    int cantidad = ((Number) row[0]).intValue(); // índice 1: cantidad
+				    turnosAño.set(mes, cantidad);
+				}
 				break;
 			}
 		}catch(Exception e)
@@ -373,6 +408,6 @@ public class TurnoController {
 		}
 		
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.writeValueAsString(lista); 
+		return mapper.writeValueAsString(turnosAño); 
 	}
 }
