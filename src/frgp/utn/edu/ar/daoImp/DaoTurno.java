@@ -283,5 +283,31 @@ public class DaoTurno implements IdaoTurno{
 	    return lista;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> traerTop5Medicos(Date inicio, Date fin) {
+		
+			ConfigHibernate ch = new ConfigHibernate();
+		    Session session = ch.abrirConexion();
+		    List<Object[]> lista = null;
+		    System.out.println("EN DAO traer top 5 medicos - entre fechas "+inicio+"-"+fin);
+	    
+	    try
+	    {
+	    	String hql = "select m.nombre ||', '|| m.apellido, count(t.id) from Turno t join t.medico m "
+	    			+ " where t.fecha between :fechaInicio and :fechaFin group by m.legajo order by count(t.id) desc limit 1";
+	    	Query query = session.createQuery(hql);
+	    	query.setParameter("fechaInicio",inicio);
+	    	query.setParameter("fechaFin",fin);
+	    	lista = (List<Object[]>) query.list();
+	    	
+	    }catch(Exception e)
+	    {
+	    	e.printStackTrace();
+	    }
+	    
+		return lista;
+	}
+
 
 }

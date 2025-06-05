@@ -93,6 +93,12 @@ public class TurnoNegocio implements IturnoNegocio{
 		return dao.traerPorEstadoYaño(estado, año);
 	}
 
+	@Override
+	public List<Object[]> traerTop5Medicos(Date inicio, Date fin) {
+		// TODO Auto-generated method stub
+		return dao.traerTop5Medicos(inicio, fin);
+	}
+
 	
 
 }

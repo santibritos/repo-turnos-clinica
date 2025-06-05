@@ -14,7 +14,7 @@
 <%@ include file="adminSideBar.jsp" %>
 <div class="main-content">
 	<h1 class="contenedor">Informe</h1>
-		
+	<div></div>	
 		<div>
 			<div class="contenedor" style="height:50px; width: 400px; gap:5px; display: flex; flex-direction: column" >
 			<h4>Turnos por especialidad: </h4> 
@@ -40,6 +40,17 @@
 			<option value="completado">Completados</option>
 			</select>
 			<canvas id="gLinea" width="400px" height="200px"></canvas>
+		</div>
+		
+		<div  style="width: 700px; height: 400px;" class="contenedor">
+			<h4>Turnos totales:</h4>
+			<select id="selectBarra">
+			<option value="15">Ultimos 15 dias</option>
+			<option value="30">Ultimos 30 dias</option>
+			<option value="365">Año actual</option>
+			<option value="730">Año pasado</option>
+			</select>
+			<canvas id="gBarra" width="400px" height="200px"></canvas>
 		</div>
 	
 
@@ -178,6 +189,40 @@ options.addEventListener('change',()=>{
     	  .catch(error => console.error('Error al obtener los datos:', error));
     	});
     
+</script>
+<script>
+const ctx3 = document.getElementById('gBarra').getContext('2d');
+const gBarra = new Chart(ctx3, {
+  type: 'bar',
+  data: {
+    labels: ${top5medicos},
+    datasets: [{
+      label: 'cantidad de turnos',
+      data: ${top5cant},
+      backgroundColor: 'rgba(54, 162, 235, 0.6)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Cantidad'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Meses'
+        }
+      }
+    }
+  }
+});
 </script>
 </body>
 </html>

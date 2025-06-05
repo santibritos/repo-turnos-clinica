@@ -265,6 +265,9 @@ public class TurnoController {
 		List<Integer>turnosAñoActual =  Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0);
 		List<Integer>turnosAñoPasado =  Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0);
 		
+		List<String>top5medicos = new ArrayList<>();
+		List<Long>top5cant = new ArrayList<>();
+		
 		try
 		{
 			
@@ -282,8 +285,8 @@ public class TurnoController {
 			List<Object[]> lista2 = neg.traerPorEstadoYaño("todos", LocalDate.now().getYear());
 			for(Object[] row : lista2)
 			{
-				int mes = ((Number) row[1]).intValue();     // índice 0: mes
-			    int cantidad = ((Number) row[0]).intValue(); // índice 1: cantidad
+				int mes = ((Number) row[1]).intValue();     
+			    int cantidad = ((Number) row[0]).intValue(); 
 			    turnosAñoActual.set(mes, cantidad);
 			}
 			
@@ -295,6 +298,12 @@ public class TurnoController {
 				    turnosAñoPasado.set(mes, cantidad);
 			}
 			
+			List<Object[]> lista4 = neg.traerTop5Medicos(java.sql.Date.valueOf(hace15dias), java.sql.Date.valueOf(hoy));
+			for(Object[] row : lista4)
+			{
+				top5medicos.add((String) row[0]);
+				top5cant.add((Long) row[1]);
+			}
 			
 		}catch(Exception e)
 		{
@@ -313,9 +322,14 @@ public class TurnoController {
 	        mav.addObject("turnosAñoPasado",mapper.writeValueAsString(turnosAñoPasado));
 	        mav.addObject("turnosAñoActual",mapper.writeValueAsString(turnosAñoActual));
 	        
+	        mav.addObject("top5medicos", mapper.writeValueAsString(top5medicos));
+	        mav.addObject("top5cant",  mapper.writeValueAsString(top5cant));
+	        
 	        mav.setViewName("informe");
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping(value="devuelveTurnosHaceXdias.html", method=RequestMethod.GET)
 	@ResponseBody
