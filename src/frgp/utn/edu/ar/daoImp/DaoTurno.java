@@ -295,11 +295,13 @@ public class DaoTurno implements IdaoTurno{
 	    try
 	    {
 	    	String hql = "select m.nombre ||', '|| m.apellido, count(t.id) from Turno t join t.medico m "
-	    			+ " where t.fecha between :fechaInicio and :fechaFin group by m.legajo order by count(t.id) desc limit 1";
+	    			+ " where t.fecha between :fechaInicio and :fechaFin group by m.legajo order by count(t.id) desc";
 	    	Query query = session.createQuery(hql);
 	    	query.setParameter("fechaInicio",inicio);
 	    	query.setParameter("fechaFin",fin);
-	    	lista = (List<Object[]>) query.list();
+	    	//lista = (List<Object[]>) query.list();
+	    	 query.setMaxResults(5);
+	    	 lista = (List<Object[]>) query.list();
 	    	
 	    }catch(Exception e)
 	    {
