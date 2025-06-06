@@ -15,25 +15,22 @@
 <div class="main-content">
 	<h1 class="contenedor">Informe</h1>
 	<div></div>	
-		<div>
-			<div class="contenedor" style="height:50px; width: 400px; gap:5px; display: flex; flex-direction: column" >
-			<h4>Turnos por especialidad: </h4> 
-			<select id="selectTorta">
+		
+			<div class="contenedor" style="height:450px; width: 400px; gap:5px;" >
+			<select id="selectTorta"  class="sInforme">
 			<option value="15">Ultimos 15 dias</option>
 			<option value="30">Ultimos 30 dias</option>
 			<option value="365">Año actual</option>
 			<option value="730">Año pasado</option>
 			</select>
+			<canvas id="gTorta"></canvas>
 			</div>
 			
-			<div  style="width: 400px; height: 400px; padding: 20px" class="contenedor">
-				<canvas id="gTorta"></canvas>
-			</div>
-		</div>
+		
+		
 		
 		<div  style="width: 700px; height: 400px;" class="contenedor">
-			<h4>Turnos totales:</h4>
-			<select id="selectLinea">
+			<select id="selectLinea"  class="sInforme">
 			<option value="todos">Todos</option>
 			<option value="cancelado">Cancelados</option>
 			<option value="pendiente">Pendientes</option>
@@ -43,8 +40,7 @@
 		</div>
 		
 		<div  style="width: 700px; height: 400px;" class="contenedor">
-			<h4>Turnos totales:</h4>
-			<select id="selectBarra">
+			<select id="selectBarra" class="sInforme">
 			<option value="15">Ultimos 15 dias</option>
 			<option value="30">Ultimos 30 dias</option>
 			<option value="365">Año actual</option>
