@@ -440,10 +440,10 @@ public class TurnoController {
 				switch(dias)
 				{
 				case 365:
-					lista = neg.traerPorEspecialidadYaño(LocalDate.now().getYear());
+					lista = neg.traerTop5MedicosDelAño(LocalDate.now().getYear());
 					break;
 				case 730:
-					lista = neg.traerPorEspecialidadYaño(LocalDate.now().getYear()-1);
+					lista = neg.traerTop5MedicosDelAño(LocalDate.now().getYear()-1);
 					break;
 				 default:
 					 lista = neg.traerTop5Medicos(java.sql.Date.valueOf(haceXdias),java.sql.Date.valueOf(hoy));

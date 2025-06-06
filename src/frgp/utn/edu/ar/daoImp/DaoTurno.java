@@ -311,5 +311,31 @@ public class DaoTurno implements IdaoTurno{
 		return lista;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> traerTop5MedicosDelAño(Integer año) {
+		ConfigHibernate ch = new ConfigHibernate();
+	    Session session = ch.abrirConexion();
+	    List<Object[]> lista = null;
+	    System.out.println("EN DAO traer top 5 medicos - del año "+año);
+    
+    try
+    {
+    	String hql = "select m.nombre ||', '|| m.apellido, count(t.id) from Turno t join t.medico m "
+    			+ " where year(t.fecha) = :year group by m.legajo order by count(t.id) desc";
+    	Query query = session.createQuery(hql);
+    	query.setParameter("year",año);
+    	//lista = (List<Object[]>) query.list();
+    	 query.setMaxResults(5);
+    	 lista = (List<Object[]>) query.list();
+    	
+    }catch(Exception e)
+    {
+    	e.printStackTrace();
+    }
+    
+	return lista;
+	}
+
 
 }
