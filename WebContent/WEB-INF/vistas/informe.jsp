@@ -14,7 +14,7 @@
 <%@ include file="adminSideBar.jsp" %>
 <div class="main-content">
 	<h1 class="contenedor">Informe</h1>
-	<div></div>	
+	<div style="height:100%; display: flex; flex-direction:row; justify-content:space-between; flex-wrap:wrap; gap: 10px; ">
 		
 			<div class="contenedor" style="height:450px; width: 400px; gap:5px;" >
 			<select id="selectTorta"  class="sInforme">
@@ -50,7 +50,7 @@
 		</div>
 	
 
-
+	</div>	
 </div>
 <script>
     const ctx = document.getElementById('gTorta').getContext('2d');
@@ -141,7 +141,7 @@ options.addEventListener('change',()=>{
           plugins: {
             title: {
               display: true,
-              text: 'Comparativa de Ventas Mensuales'
+              text: 'Comparativa de turnos anual'
             },
             tooltip: {
               mode: 'index',
@@ -193,7 +193,7 @@ const gBarra = new Chart(ctx3, {
   data: {
     labels: ${top5medicos},
     datasets: [{
-      label: 'cantidad de turnos',
+      label: 'Medicos con mas turnos',
       data: ${top5cant},
       backgroundColor: 'rgba(54, 162, 235, 0.6)',
       borderColor: 'rgba(54, 162, 235, 1)',
