@@ -424,4 +424,39 @@ public class TurnoController {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(turnosAño); 
 	}
+	
+	@RequestMapping(value="top5medicos.html", method=RequestMethod.GET)
+	@ResponseBody
+	public String top5medicos(@RequestParam("dias")Integer dias) throws JsonProcessingException
+	{
+		System.out.println("EN DEVOLVER TOP 5 MEDICOS CONTROLLER");
+			
+			List<Object[]> lista = new ArrayList<>();
+			try 
+			{
+				LocalDate hoy = LocalDate.now();
+				LocalDate haceXdias = hoy.minusDays(dias);
+				
+				switch(dias)
+				{
+				case 365:
+					lista = neg.traerPorEspecialidadYaño(LocalDate.now().getYear());
+					break;
+				case 730:
+					lista = neg.traerPorEspecialidadYaño(LocalDate.now().getYear()-1);
+					break;
+				 default:
+					 lista = neg.traerTop5Medicos(java.sql.Date.valueOf(haceXdias),java.sql.Date.valueOf(hoy));
+					break;
+					}
+				 
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString(lista);
+	}
+	
 }

@@ -223,6 +223,35 @@ const gBarra = new Chart(ctx3, {
     }
   }
 });
+
+const selectBarra = document.getElementById('selectBarra');
+
+selectBarra.addEventListener('change',()=>{
+	fetch('top5medicos.html?dias='+selectBarra.value)
+	.then(response => response.json())
+	 .then(data => {
+		 console.log("Respuesta cruda:", data)
+		 
+	 		let medicos = new Array();
+		 	let turnos = new Array();
+		 
+		 	data.forEach(reg =>{
+		 		
+		 		turnos.push(reg[1]);
+		 		medicos.push(reg[0]);
+		 	})
+		 
+		 	console.log('LABELS '+medicos);
+		 	console.log('DATA '+turnos);
+		 
+		 	gBarra.data.labels = medicos;
+		 	gBarra.data.datasets[0].data = turnos;
+		 	gBarra.update();
+		 
+	 })
+	.catch(error => console.error('Error:', error))
+})
+
 </script>
 </body>
 </html>
