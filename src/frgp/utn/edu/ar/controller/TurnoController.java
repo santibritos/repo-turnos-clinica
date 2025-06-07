@@ -160,13 +160,12 @@ public class TurnoController {
 	@RequestMapping(value="cargarWorkplace.html", method= RequestMethod.GET)
 	public ModelAndView turnosCliente(ModelAndView mav, HttpSession session)
 	{
+		List<Turno> lista = null;
 		System.out.println("en cargar workplace controller");
 		Medico medico = (Medico) session.getAttribute("medico");
 		System.out.println("MEDICO EN EL SESSION:"+medico.toString());
-		mav.addObject("listaTurnos",neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico));
-		
-		
-		
+		lista = neg.traerPorFechaYmedico(java.sql.Date.valueOf(LocalDate.now()),medico);
+		mav.addObject("listaTurnos",lista);
 		mav.setViewName("workplace");
 		return mav;
 	}

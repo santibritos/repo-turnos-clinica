@@ -23,7 +23,11 @@
 	
 	<div class="columnas-workplace">
 		<div class="contenedor cards uno">
-			
+			<c:if test="${empty listaTurnos}">
+				<div class="card fondoCard colorAzul">
+					<h4>No hay turnos.</h4>
+				</div>
+			</c:if>
 			<c:forEach items="${listaTurnos}" var="turno">
 				<div class="card fondoCard colorAzul">
 					<div class="card-content uno infoTurno">
@@ -43,7 +47,7 @@
 		
 		
 		<div>
-		<c:if test="${turnoActual != null}">
+		
 		<form action="guardarObservacion.html" method="get">
 			<table class="tabla">
 				<thead>
@@ -66,14 +70,17 @@
 					<label class="contentLabel" for="taObservacion">Observacion</label>
 				</div>
 				<textarea id="taObservacion" name="taObservacion"></textarea><br><br>
+				<c:if test="${turnoActual != null}">
+				
 					<div class="botonera">
 					<input readonly hidden type="text" id="turnoActualId" name="turnoActualId"  value="${turnoActual.id}">
 						<input type="submit" class="btn btnAzul bmediano" value="Guardar">
 						<a href="cargarWorkplace.html" class="btn btnRojo bmediano">Cancelar</a>
-					</div>				
+					</div>
+				</c:if>				
 			</form>
 						
-			</c:if>
+			
 			<c:if test="${mensajeExito == true}">
 					Guardado Con exito.
 			</c:if>
