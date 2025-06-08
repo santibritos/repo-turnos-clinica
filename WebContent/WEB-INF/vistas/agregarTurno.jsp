@@ -239,6 +239,7 @@ $(document).ready( function () {
 			  
 				if (!txtLegajo.value) {
 			        alert("Primero debe elegir un médico.");
+			        input.value=null;
 			        return;
 			    }
 
