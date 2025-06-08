@@ -47,7 +47,7 @@ $(document).ready( function () {
 				<label>Fecha del turno:</label>
 				<input required id="datePaciente" type="date" name="txtFecha" class="txt" >
 				<label>Hora del turno: </label>
-				<input hidden type="time" name="txtHora" id="txtHora" class="txt" >
+				<input required hidden type="time" name="txtHora" id="txtHora" class="txt" >
 				<div id="div-horas" class="botonesHoras"> </div>
 			<br>
 			<div class="botonera">
@@ -142,8 +142,15 @@ $(document).ready( function () {
 				});
 			}
 			
+			// carga legajo del medico en txt legajo
 			function elegir(legajo)
 			{
+				//borro botones de horarios si los habia
+				const contenedor = document.getElementById('div-horas');
+				contenedor.innerHTML = '';
+				const input = document.getElementById("datePaciente");
+				input.value = null;
+				
 				let txtLegajo = document.getElementById('txtLegajo');
 				
 				txtLegajo.value = legajo;		
@@ -237,6 +244,7 @@ $(document).ready( function () {
 			  // traigo el id del medico
 			  const txtLegajo = document.getElementById('txtLegajo');
 			  
+			  // verifico que haya un medico seleccionado
 				if (!txtLegajo.value) {
 			        alert("Primero debe elegir un médico.");
 			        input.value=null;
@@ -257,7 +265,7 @@ $(document).ready( function () {
 			  });
 			
 
-			  
+			  // para pintar los botones de rojo y desabilitarlos
 				fetch('verificarTurnosMedico.html?medicoId='+txtLegajo.value+'&fechaStr='+fechaStr)
 				.then(response => response.text()) // Ojo: .text() porque devolvés un string
 				  .then(data => {
