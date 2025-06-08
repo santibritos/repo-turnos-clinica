@@ -20,21 +20,21 @@
 		<legend>Datos Personales</legend>
 		<br>
 				<label>DNI</label>
-			<input type="text" name="txtDni" class="txt" >
+			<input required type="text" name="txtDni" class="txt" >
 			<label>Nombre</label>
-			<input type="text" name="txtNombre" class="txt" >
+			<input required type="text" name="txtNombre" class="txt" >
 			<label>Apellido</label>
-			<input type="text" name="txtApellido" class="txt">
+			<input required type="text" name="txtApellido" class="txt">
 			<label>Fecha de Nacimiento:</label>
-			<input id="datePaciente" type="date" name="txtNacimiento" class="txt" >
+			<input required id="datePaciente" type="date" name="txtNacimiento" class="txt" >
 			<label>Correo Electronico</label>
-			<input  type="Email" name="txtEmail" class="txt" >
+			<input required type="Email" name="txtEmail" class="txt" >
 			<label>telefono:</label>
-			<input type="text" name="txtTelefono" class="txt" >
+			<input required type="text" name="txtTelefono" class="txt" >
 			<label>Direccion</label>
-			<input type="text" name="txtDireccion" class="txt" >
+			<input required type="text" name="txtDireccion" class="txt" >
 			<label>Localidad:</label>
-			<input type="text" name="txtLocalidad" class="txt" >
+			<input required type="text" name="txtLocalidad" class="txt" >
 	</fieldset>
 		<div class="botonera">
 		<br>

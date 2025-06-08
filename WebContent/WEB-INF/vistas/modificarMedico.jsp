@@ -24,26 +24,26 @@
 		<legend>Datos Personales</legend>
 		<br>
 			<label>Nombre</label>
-			<input type="text" name="txtNombre" class="txt" value="${medico.nombre}">
+			<input required type="text" name="txtNombre" class="txt" value="${medico.nombre}">
 			<label>Apellido</label>
-			<input type="text" name="txtApellido" class="txt" value="${medico.apellido}">
+			<input required type="text" name="txtApellido" class="txt" value="${medico.apellido}">
 			<label>Correo Electronico</label>
-			<input type="Email" name="txtEmail" class="txt" value="${medico.correoElectronico}">
+			<input required type="Email" name="txtEmail" class="txt" value="${medico.correoElectronico}">
 			<label>telefono:</label>
-			<input type="text" name="txtTelefono" class="txt" value="${medico.telefono}">
+			<input required type="text" name="txtTelefono" class="txt" value="${medico.telefono}">
 			<label>Direccion</label>
-			<input type="text" name="txtDireccion" class="txt" value="${medico.direccion}">
+			<input required type="text" name="txtDireccion" class="txt" value="${medico.direccion}">
 			<label>Localidad:</label>
-			<input type="text" name="txtLocalidad" class="txt" value="${medico.localidad}">
+			<input required type="text" name="txtLocalidad" class="txt" value="${medico.localidad}">
 	</fieldset>
 		<br>
 		<fieldset>
 			<legend>Datos Profesionales</legend>
 			<br>
 			<label>Legajo</label>
-			<input type="text" name="txtLegajo" class="txt" value="${medico.legajo}">
+			<input required type="text" name="txtLegajo" class="txt" value="${medico.legajo}">
 			<label>Especialidad:</label>
-			<select id="sEspecialidades" name="txtEspecialidad">
+			<select required id="sEspecialidades" name="txtEspecialidad">
 				<c:forEach items="${especialidades}" var="especialidad" >
 					<option value="${especialidad.id}">
 						${especialidad.nombre}
@@ -67,10 +67,10 @@
 		<fieldset>
                 <legend>Información de Cuenta</legend>
                 <label for="username">Nombre de Usuario</label>
-                <input type="text" name="txtUsuario" required class="txt" value="${medico.usuario.usuario}"/>
+                <input required type="text" name="txtUsuario" required class="txt" value="${medico.usuario.usuario}"/>
 
                 <label for="password">Contraseña</label>
-                <input type="password" class="txt" name="txtPassword" required value="${medico.usuario.password}"/>
+                <input required type="password" class="txt" name="txtPassword" required value="${medico.usuario.password}"/>
             </fieldset>
 		<div class="botonera">
 		<br>

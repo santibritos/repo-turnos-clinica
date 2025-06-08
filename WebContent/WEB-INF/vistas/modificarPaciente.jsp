@@ -20,21 +20,21 @@
 					<legend>Datos Personales</legend>
 					<br>
 						<label>DNI</label>
-						<input type="text" name="txtDni" class="txt" value="${paciente.dni}">
+						<input required type="text" name="txtDni" class="txt" value="${paciente.dni}">
 						<label>Nombre</label>
-						<input type="text" name="txtNombre" class="txt" value="${paciente.nombre}">
+						<input required type="text" name="txtNombre" class="txt" value="${paciente.nombre}">
 						<label>Apellido</label>
-						<input type="text" name="txtApellido" class="txt" value="${paciente.apellido}">
+						<input required type="text" name="txtApellido" class="txt" value="${paciente.apellido}">
 						<label>Fecha de Nacimiento:</label>
-						<input id="datePaciente" type="date" name="txtNacimiento" class="txt" value="<fmt:formatDate value='${paciente.fecha_nacimiento}' pattern='yyyy-MM-dd'/>">
+						<input required id="datePaciente" type="date" name="txtNacimiento" class="txt" value="<fmt:formatDate value='${paciente.fecha_nacimiento}' pattern='yyyy-MM-dd'/>">
 						<label>Correo Electronico</label>
-						<input  type="Email" name="txtEmail" class="txt" value="${paciente.correo_electronico}">
+						<input required type="Email" name="txtEmail" class="txt" value="${paciente.correo_electronico}">
 						<label>telefono:</label>
-						<input type="text" name="txtTelefono" class="txt" value="${paciente.telefono}">
+						<input required type="text" name="txtTelefono" class="txt" value="${paciente.telefono}">
 						<label>Direccion</label>
-						<input type="text" name="txtDireccion" class="txt" value="${paciente.direccion}">
+						<input required type="text" name="txtDireccion" class="txt" value="${paciente.direccion}">
 						<label>Localidad:</label>
-						<input type="text" name="txtLocalidad" class="txt" value="${paciente.localidad}">
+						<input required type="text" name="txtLocalidad" class="txt" value="${paciente.localidad}">
 				</fieldset>
 					<div class="botonera">
 					<br>

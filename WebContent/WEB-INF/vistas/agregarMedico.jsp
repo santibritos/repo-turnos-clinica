@@ -21,26 +21,26 @@
 		<legend>Datos Personales</legend>
 		<br>
 			<label>Nombre</label>
-			<input type="text" name="txtNombre" class="txt">
+			<input required type="text" name="txtNombre" class="txt">
 			<label>Apellido</label>
-			<input type="text" name="txtApellido" class="txt">
+			<input required type="text" name="txtApellido" class="txt">
 			<label>Correo Electronico</label>
-			<input type="Email" name="txtEmail" class="txt">
+			<input required type="Email" name="txtEmail" class="txt">
 			<label>telefono:</label>
-			<input type="text" name="txtTelefono" class="txt">
+			<input required type="text" name="txtTelefono" class="txt">
 			<label>Direccion</label>
-			<input type="text" name="txtDireccion" class="txt">
+			<input required type="text" name="txtDireccion" class="txt">
 			<label>Localidad:</label>
-			<input type="text" name="txtLocalidad" class="txt">
+			<input required type="text" name="txtLocalidad" class="txt">
 	</fieldset>
 		<br>
 		<fieldset>
 			<legend>Datos Profesionales</legend>
 			<br>
 			<label>Legajo</label>
-			<input type="text" name="txtLegajo" class="txt">
+			<input required type="text" name="txtLegajo" class="txt">
 			<label>Especialidad:</label>
-			<select name="txtEspecialidad">
+			<select required name="txtEspecialidad">
 				<c:forEach items="${especialidades}" var="especialidad" >
 					<option value="${especialidad.id}">
 						${especialidad.nombre}
@@ -73,10 +73,10 @@
 		<fieldset>
                 <legend>Información de Cuenta</legend>
                 <label for="username">Nombre de Usuario</label>
-                <input type="text" name="txtUsuario" required class="txt"/>
+                <input required type="text" name="txtUsuario" required class="txt"/>
 
                 <label for="password">Contraseña</label>
-                <input type="password" class="txt" name="txtPassword" required />
+                <input required type="password" class="txt" name="txtPassword" required />
             </fieldset>
             <br>
 		<div class="botonera">

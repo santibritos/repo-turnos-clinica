@@ -45,7 +45,6 @@ $(document).ready( function () {
 	          			<th>Legajo</th>
 						<th>Nombre</th>
 						<th>Apellido</th>
-						<th>Fecha Nacimiento</th>
 						<th>Direccion</th>
 						<th>Localidad</th>
 						<th>Correo Electronico</th>
@@ -63,7 +62,6 @@ $(document).ready( function () {
 	     			<td>${medico.legajo}</td>
 				            <td>${medico.nombre}</td>
 				            <td>${medico.apellido}</td>
-				            <td>${medico.fecha_nacimiento}</td>
 				            <td>${medico.direccion}</td>
 				            <td>${medico.localidad}</td>
 				            <td>${medico.correoElectronico}</td>

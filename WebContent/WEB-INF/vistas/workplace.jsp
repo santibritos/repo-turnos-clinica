@@ -57,9 +57,9 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>${turnoActual.paciente.nombre}</td>
-						<td>${turnoActual.paciente.apellido}</td>
-						<td>${turnoActual.paciente.dni}</td>
+						<td class="txt">${turnoActual.paciente.nombre}</td>
+						<td class="txt">${turnoActual.paciente.apellido}</td>
+						<td class="txt">${turnoActual.paciente.dni}</td>
 					</tr>
 				</tbody>
 			</table>

@@ -41,11 +41,11 @@ $(document).ready( function () {
 			<legend>Datos del Turno</legend>
 			<br>
 				<label>Dni del Paciente:</label>
-				<input type="text" name="txtDni" class="txt" >
+				<input required type="text" name="txtDni" class="txt" >
 				<label>Legajo del Medico:</label>
-				<input readonly type="text" id="txtLegajo" name="txtLegajo" class="txt" >
+				<input required readonly type="text" id="txtLegajo" name="txtLegajo" class="txt" >
 				<label>Fecha del turno:</label>
-				<input id="datePaciente" type="date" name="txtFecha" class="txt" >
+				<input required id="datePaciente" type="date" name="txtFecha" class="txt" >
 				<label>Hora del turno: </label>
 				<input hidden type="time" name="txtHora" id="txtHora" class="txt" >
 				<div id="div-horas" class="botonesHoras"> </div>
