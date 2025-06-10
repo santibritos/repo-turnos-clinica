@@ -58,13 +58,16 @@ public class TurnoController {
      EspecialidadNegocio eneg = (EspecialidadNegocio)appContext.getBean("beanEspecialidadNegocio");
    
      
-     public Boolean validarDni(String dni)
-     {
-    	 String regex = "[0-9 ]*$";
-    	 if(dni.matches(regex)) {
-    		return pneg.Exist(dni);
-    	 }else{return false;}
-     }
+     public String validarDni(String dni) {
+    	    
+    	    String regex = "[0-9]+";
+
+    	    if (!dni.matches(regex)) {
+    	        return "Dni no válido";
+    	    }
+    	    
+    	    return pneg.Exist(dni) ? "existe" : "El paciente no existe en la base de datos";
+    	}
      
      
  	@RequestMapping(value = "verificarTurnosMedico.html", method = RequestMethod.GET)
@@ -114,10 +117,11 @@ public class TurnoController {
 	@RequestMapping(value="altaTurno2.html", method=RequestMethod.POST)
 	public ModelAndView altaTurno2(ModelAndView mav, String txtDni, String txtLegajo, String txtFecha, String txtHora)
 	{
-		if(validarDni(txtDni)==false)
+		String validacion = validarDni(txtDni);
+		if(!validacion.matches("existe") )
 			{
 				System.out.println("EL PACIENTE NO ES VALIDO");
-				mav.addObject("pacienteInvalido",true);
+				mav.addObject("alerta",validacion);
 				List <Especialidad> especialidades = eneg.ReadAll();
 		    	mav.addObject("especialidades",especialidades);
 				

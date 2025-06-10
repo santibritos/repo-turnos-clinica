@@ -35,9 +35,12 @@ $(document).ready( function () {
 	
 <div class="poner-columnas"> 
 	<div class="contenedor uno">
-		<form action="altaTurno2.html" method="post">
 	
+		<form action="altaTurno2.html" method="post">
 		<fieldset>
+		<c:if test="${alerta!=null}"><div class="alerta" id="alerta"><label id="labelAlerta" class="">${alerta}</label>
+		<button type="button" onclick="cerrarAlerta()" class="btnAlerta">x</button></div></c:if>
+		
 			<h4>Datos del Turno</h4>
 			<br>
 				<label>Dni del Paciente:</label>
@@ -55,9 +58,10 @@ $(document).ready( function () {
 			<br>
 			<input class="btn btnAzul bmediano" type="submit" value="Agregar"><a href="turnos.html" class="btn btnRojo bmediano">Cancelar</a>
 			</div>
-			<c:if test="${pacienteInvalido==true}">Paciente no valido*</c:if>
+			
 			</fieldset>
-		</form>
+			</form>
+		
 			</div>
 			<!-- guardo los datos de los horarios -->
 			<c:forEach var="medico" items="${listaMedicos}">
@@ -129,6 +133,12 @@ $(document).ready( function () {
 
 	<script>
 			
+			function cerrarAlerta()
+			{
+				const alerta = document.getElementById('alerta');
+				alerta.style.display = 'none';
+			}
+	
 			function ajustarMedicos()
 			{
 				const especialidades = document.getElementById('sEspecialidades').value;
