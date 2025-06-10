@@ -77,6 +77,10 @@ public class MedicoController {
     	 u.setPassword(txtPassword);
     	 uneg.Add(u);
     	 
+    	 System.out.println("<<<<<<<<<<<<<<<<<< ----- EN CREAR MEDICO ------------- >>>>>");
+    	 System.out.println("Lunes "+tLunes1+" "+tLunes2+ "Martes "+tMartes1+" "+tMartes2+" Miercoles "+tMiercoles1+" "+tMiercoles2+" Jueves "
+    	 +tJueves1+" "+tJueves2+ "Viernes "+tViernes1+" "+tViernes2);
+    	 
     	 // se lo paso al nuevo medico
     	 m.setUsuario(u);
     	 m.setNombre(txtNombre);
@@ -197,6 +201,10 @@ public class MedicoController {
     	 u.setUsuario(txtUsuario);
     	 u.setPassword(txtPassword);
     	 uneg.Update(u);
+    	 
+    	 System.out.println("<<<<<<<<<<<<<<<<<< ----- EN MODIFICAR MEDICO ------------- >>>>>");
+    	 System.out.println("Lunes "+tlunes1+" "+tlunes2+ "Martes "+tmartes1+" "+tmartes2+" Miercoles "+tmiercoles1+" "+tmiercoles2+" Jueves "
+    	 +tjueves1+" "+tjueves2+ "Viernes "+tviernes1+" "+tviernes2);
     	 
     	 m.setUsuario(u);
     	 m.setNombre(txtNombre);

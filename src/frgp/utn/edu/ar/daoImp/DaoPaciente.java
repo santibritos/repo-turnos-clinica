@@ -64,14 +64,14 @@ public class DaoPaciente implements IdaoPaciente {
 	}
 
 	public boolean Exist(String dniPaciente) {
-		Session session = conexion.abrirConexion();
-		session.beginTransaction();
+		ConfigHibernate config = new ConfigHibernate();
+		Session session = config.abrirConexion();
 		Paciente paciente = (Paciente)session.get(Paciente.class, dniPaciente);
 		if (paciente!=null) {
-			conexion.cerrarConexion();
+			config.cerrarConexion();
 			return true;
 		}
-		conexion.cerrarConexion();
+		config.cerrarConexion();
 		return false;
 	}
 	

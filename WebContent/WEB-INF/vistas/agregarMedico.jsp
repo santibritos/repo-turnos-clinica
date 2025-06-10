@@ -49,24 +49,24 @@
 			</select>		
 		</fieldset>
 		<br>
-			<fieldset>
+			<fieldset class="horario">
 		<legend>Horario</legend>
 			<div>
-			<label for="rbLunes">Lunes:</label>
+			<label class="label-horario" for="rbLunes">Lunes:</label>
 			<input type="checkbox" id="cblunes" name="cblunes" onclick="habilitarCb('lunes')" value="lunes">
-			<label>Llegada: </label><input type="time" name="tLunes1" id="tlunes2"><label>Salida:</label><input type="time" name="tLunes2" id="tlunes1"><br>
-			<label for="cbMartes">Martes:</label>
+			<label class="label-horario" >Llegada: </label><input type="time" name="tLunes1" id="tlunes2"><label>Salida: </label><input type="time" name="tLunes2" id="tlunes1"><br>
+			<label class="label-horario" for="cbMartes">Martes:</label>
 			<input type="checkbox" id="cbmartes" name="cbmartes" onclick="habilitarCb('martes')" value="Martes">
-			<label>Llegada: </label><input type="time"  name="tMartes1" id="tmartes1"><label>Salida:</label><input type="time" name="tMartes2" id="tmartes2"><br>
-			<label for="cbMiercoles">Miercles:</label>
+			<label class="label-horario">Llegada: </label><input type="time"  name="tMartes1" id="tmartes1"><label>Salida: </label><input type="time" name="tMartes2" id="tmartes2"><br>
+			<label class="label-horario" for="cbMiercoles">Miercles:</label>
 			<input type="checkbox" id="cbmiercoles" name="cbmiercoles"  onclick="habilitarCb('miercoles')" value="Miercoles">
-			<label>Llegada: </label><input type="time" name="tMiercoles2" id="tmiercoles1"><label>Salida:</label><input type="time" name="tMiercoles2" id="tmiercoles2"><br>
-			<label for="cbJueves">Jueves:</label>
+			<label class="label-horario">Llegada: </label><input type="time" name="tMiercoles2" id="tmiercoles1"><label>Salida:</label><input type="time" name="tMiercoles2" id="tmiercoles2"><br>
+			<label class="label-horario" for="cbJueves">Jueves:</label>
 			<input type="checkbox" id="cbjueves" name="cbjueves" onclick="habilitarCb('jueves')" value="Jueves">
-			<label>Llegada: </label><input type="time" name="tJueves1" id="tjueves1"><label>Salida:</label><input type="time" name="tJueves2" id="tjueves2"><br>
-			<label for="cbViernes">Viernes:</label>
+			<label class="label-horario">Llegada: </label><input type="time" name="tJueves1" id="tjueves1"><label>Salida: </label><input type="time" name="tJueves2" id="tjueves2"><br>
+			<label class="label-horario" for="cbViernes">Viernes:</label>
 			<input type="checkbox" id="cbviernes" name="cbviernes" onclick="habilitarCb('viernes')" value="Viernes">
-			<label>Llegada: </label><input type="time" id="tviernes1" name="tViernes2"><label>Salida:</label><input type="time" id="tviernes2" name="tViernes2"><br>
+			<label class="label-horario">Llegada: </label><input type="time" id="tviernes1" name="tViernes2"><label>Salida: </label><input type="time" id="tviernes2" name="tViernes2"><br>
 			</div>
 		</fieldset>
 		<br>

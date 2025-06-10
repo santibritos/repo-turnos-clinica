@@ -38,7 +38,7 @@ $(document).ready( function () {
 		<form action="altaTurno2.html" method="post">
 	
 		<fieldset>
-			<legend>Datos del Turno</legend>
+			<h4>Datos del Turno</h4>
 			<br>
 				<label>Dni del Paciente:</label>
 				<input required type="text" name="txtDni" class="txt" >
@@ -55,6 +55,7 @@ $(document).ready( function () {
 			<br>
 			<input class="btn btnAzul bmediano" type="submit" value="Agregar"><a href="turnos.html" class="btn btnRojo bmediano">Cancelar</a>
 			</div>
+			<c:if test="${pacienteInvalido==true}">Paciente no valido*</c:if>
 			</fieldset>
 		</form>
 			</div>
@@ -142,6 +143,12 @@ $(document).ready( function () {
 				});
 			}
 			
+			function borrarBotones(){
+				const contenedor = document.getElementById('div-horas');
+				contenedor.innerHTML = '';
+				const txt = document.getElementById('txtHora');
+				txt.value=null;
+			}
 			// carga legajo del medico en txt legajo
 			function elegir(legajo)
 			{
@@ -230,10 +237,13 @@ $(document).ready( function () {
 				
 			}
 			
+			
+			
 			// para detectar el cambio de fecha y dar los horarios correctos
 			const input = document.getElementById("datePaciente");
 
-			input.addEventListener("change", () => {
+				input.addEventListener("change", () => {
+				borrarBotones();
 				
 			  const fechaStr = input.value;	
 			  const fecha = new Date(fechaStr);

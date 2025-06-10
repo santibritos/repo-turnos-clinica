@@ -58,6 +58,15 @@ public class TurnoController {
      EspecialidadNegocio eneg = (EspecialidadNegocio)appContext.getBean("beanEspecialidadNegocio");
    
      
+     public Boolean validarDni(String dni)
+     {
+    	 String regex = "[0-9 ]*$";
+    	 if(dni.matches(regex)) {
+    		return pneg.Exist(dni);
+    	 }else{return false;}
+     }
+     
+     
  	@RequestMapping(value = "verificarTurnosMedico.html", method = RequestMethod.GET)
  	@ResponseBody
  	public String obtenerTurnosOcupados(@RequestParam("medicoId") int medicoId, @RequestParam("fechaStr") String fechaStr) throws JsonProcessingException {
@@ -105,16 +114,34 @@ public class TurnoController {
 	@RequestMapping(value="altaTurno2.html", method=RequestMethod.POST)
 	public ModelAndView altaTurno2(ModelAndView mav, String txtDni, String txtLegajo, String txtFecha, String txtHora)
 	{
-		System.out.println(txtHora);
-		System.out.println(txtFecha);
-		t.setMedico(mneg.ReadOne(Integer.parseInt(txtLegajo)));
-		t.setPaciente(pneg.ReadOne(txtDni));
-		t.setFecha(java.sql.Date.valueOf(txtFecha));
-		t.setHora(java.sql.Time.valueOf(txtHora+":00"));
-		t.setEstado("pendiente");
-		neg.Add(t);
-		mav.addObject("listaTurnos",neg.ReadAll());
-		mav.setViewName("abmlTurnos");
+		if(validarDni(txtDni)==false)
+			{
+				System.out.println("EL PACIENTE NO ES VALIDO");
+				mav.addObject("pacienteInvalido",true);
+				List <Especialidad> especialidades = eneg.ReadAll();
+		    	mav.addObject("especialidades",especialidades);
+				
+				List<Medico> listaMedicos = mneg.ReadAll();
+				 mav.addObject("listaMedicos",listaMedicos);
+				mav.setViewName("agregarTurno");
+				
+				
+			}else
+			{
+				System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				System.out.println(pneg.Exist(txtDni));
+				System.out.println(txtHora);
+				System.out.println(txtFecha);
+				t.setMedico(mneg.ReadOne(Integer.parseInt(txtLegajo)));
+				t.setPaciente(pneg.ReadOne(txtDni));
+				t.setFecha(java.sql.Date.valueOf(txtFecha));
+				t.setHora(java.sql.Time.valueOf(txtHora+":00"));
+				t.setEstado("pendiente");
+				neg.Add(t);
+				mav.addObject("listaTurnos",neg.ReadAll());
+				mav.setViewName("abmlTurnos");
+			}
+		
 		return mav;
 	}
 	
