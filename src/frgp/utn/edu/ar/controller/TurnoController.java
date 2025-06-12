@@ -36,6 +36,7 @@ import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.resources.Config;
+import frgp.utn.edu.ar.util.Validador;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -117,7 +118,8 @@ public class TurnoController {
 	@RequestMapping(value="altaTurno2.html", method=RequestMethod.POST)
 	public ModelAndView altaTurno2(ModelAndView mav, String txtDni, String txtLegajo, String txtFecha, String txtHora)
 	{
-		String validacion = validarDni(txtDni);
+		Validador v = new Validador();
+		String validacion = v.validarDni(txtDni);
 		if(!validacion.matches("existe") )
 			{
 				System.out.println("EL PACIENTE NO ES VALIDO");
