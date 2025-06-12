@@ -87,7 +87,7 @@ public class Validador {
 		return apellido.matches(regex) ? "valido" : "apellido no valido";
 	}
 	
-	public String validarMedico(Integer legajo)
+	public String validarLegajo(Integer legajo)
 	{
 		String regex = "^\\d{1,5}$";
 		
@@ -95,11 +95,18 @@ public class Validador {
 		
 		return mneg.Exist(legajo) ? "valido" : "El medico no existe en la base de datos";
 	}
-	public String validarMedicoNuevo(Integer legajo)
+	public String validarLegajoNuevo(Integer legajo)
 	{
 		String regex = "^\\d{1,5}$";
 		
 		return (!legajo.toString().matches(regex))? "legajo no valido" : "valido";
+	}
+	
+	public String validarContrasenia(String contra)
+	{
+		String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=]).{8,}$";
+		return contra.matches(regex)? "valido" : "Contraseña no valida, debe contener minimo 8 caracteres, "
+				+ "un numero, una letra Mayuscula y un simbolo ! @ # $ % ^ & * ( ) _ + - =";
 	}
 	
 	public List<String> validarPacienteNuevo(String dni, String nombre, String apellido, String telefono, String email)
@@ -125,6 +132,38 @@ public class Validador {
 		respuesta = this.validarEmail(email);
 		if (respuesta!="valido") lista.add(respuesta);
 		
+		
+		return lista;
+	}
+	
+	public List<String> validarMedicoNuevo(String nombre, String apellido, String telefono, String email, Integer legajo, String contra, String contra2)
+	{
+		List<String> lista = new ArrayList<String>();
+		
+		
+		String respuesta = this.validarNombre(nombre);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarApellido(apellido);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarTelefono(telefono);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarEmail(email);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarLegajo(legajo);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		if(contra != contra2)
+		{
+			lista.add("las contraseñas no coinciden");
+		}else
+		{
+			respuesta = this.validarContrasenia(contra);
+			if (respuesta!="valido") lista.add(respuesta);
+		}
 		
 		return lista;
 	}

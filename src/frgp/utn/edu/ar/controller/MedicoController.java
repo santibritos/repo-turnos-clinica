@@ -22,6 +22,7 @@ import frgp.utn.edu.ar.negocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.negocioImp.UsuarioNegocio;
 import frgp.utn.edu.ar.resources.Config;
+import frgp.utn.edu.ar.util.Validador;
 
 
 @Controller
@@ -67,118 +68,129 @@ public class MedicoController {
      
      @RequestMapping(value="NuevoMedico.html", method = RequestMethod.POST)
      public ModelAndView agregarMedico(ModelAndView mav, String txtNombre, String txtApellido, String txtTelefono, String txtEmail, String
-    		 txtDireccion, String txtLocalidad, int txtLegajo, int txtEspecialidad, String txtUsuario, String txtPassword,
+    		 txtDireccion, String txtLocalidad, int txtLegajo, int txtEspecialidad, String txtUsuario, String txtPassword,String txtPassword2,
     		 String cbLunes, String cbMartes, String cbMiercoles, String cbJueves, String cbViernes,
     		 String tLunes1, String tLunes2, String tMartes1, String tMartes2, String tMiercoles1, String tMiercoles2,
     		 String tJueves1, String tJueves2, String tViernes1, String tViernes2) 
      {
-    	 // creo el usuario primero
-    	 u.setUsuario(txtUsuario);
-    	 u.setPassword(txtPassword);
-    	 uneg.Add(u);
     	 
-    	 System.out.println("<<<<<<<<<<<<<<<<<< ----- EN CREAR MEDICO ------------- >>>>>");
-    	 System.out.println("Lunes "+tLunes1+" "+tLunes2+ "Martes "+tMartes1+" "+tMartes2+" Miercoles "+tMiercoles1+" "+tMiercoles2+" Jueves "
-    	 +tJueves1+" "+tJueves2+ "Viernes "+tViernes1+" "+tViernes2);
+    	 Validador v = new Validador();
     	 
-    	 // se lo paso al nuevo medico
-    	 m.setUsuario(u);
-    	 m.setNombre(txtNombre);
-    	 m.setApellido(txtApellido);
-    	 m.setLegajo(txtLegajo);
-    	 m.setEspecialidad(eneg.ReadOne(txtEspecialidad));
-    	 m.setCorreoElectronico(txtEmail);
-    	 m.setTelefono(txtTelefono);
-    	 m.setLocalidad(txtLocalidad);
-    	 m.setDireccion(txtDireccion);
-    	 //m.setHorario(txtHorario);
-    	 m.setEstado(true);
+    	 List<String> alertas = v.validarMedicoNuevo(txtNombre, txtApellido, txtTelefono, txtEmail, txtLegajo, txtPassword, txtPassword2);
     	 
-    	 if(cbLunes != null) 
+    	 if(alertas.isEmpty())
     	 {
-    		 try
-    		 {
-    			 h1.setEntrada(Time.valueOf(tLunes1+":00"));
-        		 h1.setSalida(Time.valueOf(tLunes2+":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tLunes1);
-    		 }
-    		 
-    	 }
-    	 if(cbMartes != null) 
+    		 // creo el usuario primero
+        	 u.setUsuario(txtUsuario);
+        	 u.setPassword(txtPassword);
+        	 uneg.Add(u);
+        	 
+        	 System.out.println("<<<<<<<<<<<<<<<<<< ----- EN CREAR MEDICO ------------- >>>>>");
+        	 System.out.println("Lunes "+tLunes1+" "+tLunes2+ "Martes "+tMartes1+" "+tMartes2+" Miercoles "+tMiercoles1+" "+tMiercoles2+" Jueves "
+        	 +tJueves1+" "+tJueves2+ "Viernes "+tViernes1+" "+tViernes2);
+        	 
+        	 // se lo paso al nuevo medico
+        	 m.setUsuario(u);
+        	 m.setNombre(txtNombre);
+        	 m.setApellido(txtApellido);
+        	 m.setLegajo(txtLegajo);
+        	 m.setEspecialidad(eneg.ReadOne(txtEspecialidad));
+        	 m.setCorreoElectronico(txtEmail);
+        	 m.setTelefono(txtTelefono);
+        	 m.setLocalidad(txtLocalidad);
+        	 m.setDireccion(txtDireccion);
+        	 //m.setHorario(txtHorario);
+        	 m.setEstado(true);
+        	 
+        	 if(cbLunes != null) 
+        	 {
+        		 try
+        		 {
+        			 h1.setEntrada(Time.valueOf(tLunes1+":00"));
+            		 h1.setSalida(Time.valueOf(tLunes2+":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tLunes1);
+        		 }
+        		 
+        	 }
+        	 if(cbMartes != null) 
+        	 {
+        		 try
+        		 {
+        			 h2.setEntrada(Time.valueOf(tMartes1+=":00"));
+            		 h2.setSalida(Time.valueOf(tMartes2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tMartes1);
+        			 System.out.println(tMartes2);
+        		 }
+        		
+        	 }
+        	 if(cbMiercoles != null) 
+        	 {
+        		 try
+        		 {
+        			 h3.setEntrada(Time.valueOf(tMiercoles1+=":00"));
+            		 h3.setSalida(Time.valueOf(tMiercoles2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tMiercoles1);
+        			 System.out.println(tMiercoles2);
+        		 }
+        	 }
+        	 if(cbJueves != null) 
+        	 {
+        		 try
+        		 {
+        			 h4.setEntrada(Time.valueOf(tJueves1+=":00"));
+            		 h4.setSalida(Time.valueOf(tJueves2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tJueves1);
+        			 System.out.println(tJueves2);
+        		 }
+        	 }
+        	 if(cbViernes != null) 
+        	 {
+        		 try
+        		 {
+        			 h5.setEntrada(Time.valueOf(tViernes1+=":00"));
+            		 h5.setSalida(Time.valueOf(tViernes2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tViernes1);
+        			 System.out.println(tViernes2);
+        		 }
+        	 }
+        	 
+        	 
+    		 h1.setDia(dneg.readOne(1));
+    		 h2.setDia(dneg.readOne(2));
+    		 h3.setDia(dneg.readOne(3));
+    		 h4.setDia(dneg.readOne(4));
+    		 h5.setDia(dneg.readOne(5));
+        	 
+        	 listaHorarios = new ArrayList<Horario>();
+        	 
+        	 listaHorarios.add(h1);
+        	 listaHorarios.add(h2);
+        	 listaHorarios.add(h3);
+        	 listaHorarios.add(h4);
+        	 listaHorarios.add(h5);
+        	 
+        	 m.setListaHorarios(listaHorarios);
+        	 
+        	 neg.Add(m);
+        	 
+        	 List<Medico> lista = neg.ReadAll();
+        	 mav.addObject("listaMedicos",lista);
+         	 mav.setViewName("abmlMedicos");
+    	 }else
     	 {
-    		 try
-    		 {
-    			 h2.setEntrada(Time.valueOf(tMartes1+=":00"));
-        		 h2.setSalida(Time.valueOf(tMartes2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tMartes1);
-    			 System.out.println(tMartes2);
-    		 }
-    		
+    		 mav.addObject("alertas",alertas);
+    		 mav.setViewName("agregarMedico");
     	 }
-    	 if(cbMiercoles != null) 
-    	 {
-    		 try
-    		 {
-    			 h3.setEntrada(Time.valueOf(tMiercoles1+=":00"));
-        		 h3.setSalida(Time.valueOf(tMiercoles2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tMiercoles1);
-    			 System.out.println(tMiercoles2);
-    		 }
-    	 }
-    	 if(cbJueves != null) 
-    	 {
-    		 try
-    		 {
-    			 h4.setEntrada(Time.valueOf(tJueves1+=":00"));
-        		 h4.setSalida(Time.valueOf(tJueves2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tJueves1);
-    			 System.out.println(tJueves2);
-    		 }
-    	 }
-    	 if(cbViernes != null) 
-    	 {
-    		 try
-    		 {
-    			 h5.setEntrada(Time.valueOf(tViernes1+=":00"));
-        		 h5.setSalida(Time.valueOf(tViernes2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tViernes1);
-    			 System.out.println(tViernes2);
-    		 }
-    	 }
-    	 
-    	 
-		 h1.setDia(dneg.readOne(1));
-		 h2.setDia(dneg.readOne(2));
-		 h3.setDia(dneg.readOne(3));
-		 h4.setDia(dneg.readOne(4));
-		 h5.setDia(dneg.readOne(5));
-    	 
-    	 listaHorarios = new ArrayList<Horario>();
-    	 
-    	 listaHorarios.add(h1);
-    	 listaHorarios.add(h2);
-    	 listaHorarios.add(h3);
-    	 listaHorarios.add(h4);
-    	 listaHorarios.add(h5);
-    	 
-    	 m.setListaHorarios(listaHorarios);
-    	 
-    	 neg.Add(m);
-    	 
-    	 List<Medico> lista = neg.ReadAll();
-    	 mav.addObject("listaMedicos",lista);
-     	 mav.setViewName("abmlMedicos");
-    	 
     	 return mav;
      }
      @RequestMapping(value="modificarMedico{legajo}.html", method = RequestMethod.GET)

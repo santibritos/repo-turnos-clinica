@@ -18,6 +18,8 @@
 	<form action="NuevoMedico.html" method="post">
 
 	<fieldset>
+	<c:if test="${alertas!=null}"><div class="alerta" id="alerta"><label id="labelAlerta" class="">${alertas}</label>
+		<button type="button" onclick="cerrarAlerta()" class="btnAlerta">x</button></div></c:if>
 		<legend>Datos Personales</legend>
 		<br>
 			<label>Nombre</label>
@@ -77,6 +79,8 @@
 
                 <label for="password">Contraseña</label>
                 <input required type="password" class="txt" name="txtPassword" required />
+                <label for="password">Repetir Contraseña</label>
+                <input required type="password" class="txt" name="txtPassword2" required />
             </fieldset>
             <br>
 		<div class="botonera">
@@ -85,6 +89,13 @@
 	</form>
 		</div>
 	</div>
+	<script>
+	function cerrarAlerta()
+	{
+		const alerta = document.getElementById('alerta');
+		alerta.style.display = 'none';
+	}
+	</script>
 	<script>
 // script para habilitar o desabilitar la seleccion de horas en base al valor de los checkbox
 	function habilitarCb(dia)
