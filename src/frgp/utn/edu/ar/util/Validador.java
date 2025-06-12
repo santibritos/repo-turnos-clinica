@@ -40,7 +40,7 @@ public class Validador {
  	        return "Dni no válido";
  	    }
  	    
- 	    return pneg.Exist(dni) ? "existe" : "El paciente no existe en la base de datos";
+ 	    return pneg.Exist(dni) ? "valido" : "El paciente no existe en la base de datos";
 	}
 	public String validarDniNuevo(String dni)
 		{

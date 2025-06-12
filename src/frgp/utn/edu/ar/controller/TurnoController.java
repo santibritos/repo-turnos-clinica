@@ -120,7 +120,7 @@ public class TurnoController {
 	{
 		Validador v = new Validador();
 		String validacion = v.validarDni(txtDni);
-		if(!validacion.matches("valido") )
+		if(validacion != "valido" )
 			{
 				System.out.println("EL PACIENTE NO ES VALIDO");
 				mav.addObject("alerta",validacion);
