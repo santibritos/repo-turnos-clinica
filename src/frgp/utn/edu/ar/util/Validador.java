@@ -1,5 +1,8 @@
 package frgp.utn.edu.ar.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -39,6 +42,12 @@ public class Validador {
  	    
  	    return pneg.Exist(dni) ? "existe" : "El paciente no existe en la base de datos";
 	}
+	public String validarDniNuevo(String dni)
+		{
+		 String regex = "[0-9]+";
+ 	        return dni.matches(regex) ? "valido": "Dni no v·lido";
+ 	    }
+ 	    
 	/*
 	 * (?:\+54\s?)? = Opcional: cÛdigo internacional argentino, con espacio opcional.
 
@@ -72,6 +81,11 @@ public class Validador {
 		String regex = "^[a-zA-Z·ÈÌÛ˙¡…Õ”⁄Ò—]{2,}$";
 		return nombre.matches(regex) ? "valido" : "nombre no valido";
 	}
+	public String validarApellido(String apellido)
+	{
+		String regex = "^[a-zA-Z·ÈÌÛ˙¡…Õ”⁄Ò—]{2,}$";
+		return apellido.matches(regex) ? "valido" : "apellido no valido";
+	}
 	
 	public String validarMedico(Integer legajo)
 	{
@@ -79,6 +93,39 @@ public class Validador {
 		
 		if(!legajo.toString().matches(regex))return "legajo no valido";
 		
-		return mneg.Exist(legajo) ? "existe" : "El medico no existe en la base de datos";
+		return mneg.Exist(legajo) ? "valido" : "El medico no existe en la base de datos";
+	}
+	public String validarMedicoNuevo(Integer legajo)
+	{
+		String regex = "^\\d{1,5}$";
+		
+		return (!legajo.toString().matches(regex))? "legajo no valido" : "valido";
+	}
+	
+	public List<String> validarPacienteNuevo(String dni, String nombre, String apellido, String telefono, String email)
+	{
+		List<String> lista = new ArrayList<String>();
+		
+		System.out.println(" < <<<<<<<<<<<<<<<< PRUEBA DE LA LISTA DE ALERTAS EN EL VALIDADOR ----------------");
+		System.out.println(" < <<<<<<<<<<<<<<<< PRUEBA DE LA LISTA DE ALERTAS EN EL VALIDADOR ----------------");
+		System.out.println(lista);
+		
+		String respuesta = this.validarDniNuevo(dni);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarNombre(nombre);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarApellido(apellido);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarTelefono(telefono);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarEmail(email);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		
+		return lista;
 	}
 }

@@ -31,12 +31,22 @@ import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.negocioImp.UsuarioNegocio;
+import frgp.utn.edu.ar.util.Validador;
 
 @Configuration
 public class Config {
 	
 
-	
+	/*
+	//bean validador
+	@Bean
+	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+	public Validador beanValidador()
+	{
+		Validador v = new Validador();
+		return v;
+	}
+	*/
 	///bean de especialidad
 	
 	@Bean

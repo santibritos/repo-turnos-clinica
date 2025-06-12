@@ -17,6 +17,7 @@ import frgp.utn.edu.ar.entidades.Medico;
 import frgp.utn.edu.ar.entidades.Paciente;
 import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.resources.Config;
+import frgp.utn.edu.ar.util.Validador;
 
 @Controller
 public class PacienteController {
@@ -26,6 +27,8 @@ public class PacienteController {
 	 Paciente p = (Paciente)appContext.getBean("beanPaciente");
     PacienteNegocio neg = (PacienteNegocio)appContext.getBean("beanPacienteNegocio");
     
+    
+  
     
     @RequestMapping("Pacientes.html")
     public ModelAndView pacientes(ModelAndView mav)
@@ -88,20 +91,36 @@ public class PacienteController {
     public ModelAndView altaPaciente2(ModelAndView mav, String txtDni, String txtNombre, String txtApellido,
     		String txtEmail, String txtTelefono, String txtDireccion, String txtLocalidad, String txtNacimiento)
     {
-    	p.setNombre(txtNombre);
-    	p.setApellido(txtApellido);
-    	p.setDni(txtDni);
-    	p.setCorreo_electronico(txtEmail);
-    	p.setTelefono(txtTelefono);
-    	p.setDireccion(txtDireccion);
-    	p.setLocalidad(txtLocalidad);
-    	p.setFecha_nacimiento(java.sql.Date.valueOf(txtNacimiento));
-    	p.setEstado(true);
+    	Validador v = new Validador();
     	
-    	neg.Add(p);
-    	mav.setViewName("abmlPacientes");
-    	List<Paciente> listaPacientes = neg.ReadAll();
-    	mav.addObject("listaPacientes",listaPacientes);
+    	List<String> alertas = v.validarPacienteNuevo(txtDni, txtNombre, txtApellido, txtTelefono, txtEmail);
+    	
+    	if(alertas.isEmpty())
+    	{
+    		p.setNombre(txtNombre);
+        	p.setApellido(txtApellido);
+        	p.setDni(txtDni);
+        	p.setCorreo_electronico(txtEmail);
+        	p.setTelefono(txtTelefono);
+        	p.setDireccion(txtDireccion);
+        	p.setLocalidad(txtLocalidad);
+        	p.setFecha_nacimiento(java.sql.Date.valueOf(txtNacimiento));
+        	p.setEstado(true);
+        	
+        	try {
+        		neg.Add(p);
+        		mav.setViewName("abmlPacientes");
+            	List<Paciente> listaPacientes = neg.ReadAll();
+            	mav.addObject("listaPacientes",listaPacientes);
+        	}catch(Exception e)
+        	{
+        		e.printStackTrace();
+        	}
+    	}else
+    	{
+    		mav.addObject("alertas",alertas);
+    		mav.setViewName("agregarPaciente");
+    	}
     	return mav;
     }
 	@RequestMapping("misPacientes.html")
