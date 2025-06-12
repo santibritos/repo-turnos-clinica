@@ -71,7 +71,7 @@ import frgp.utn.edu.ar.entidades.Medico;
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			Medico medico = (Medico)session.get(Medico.class, m);
-			if (medico.getEstado()==true) {
+			if (medico != null) {
 				System.out.println("existe");
 				ch.cerrarConexion();
 				return true;

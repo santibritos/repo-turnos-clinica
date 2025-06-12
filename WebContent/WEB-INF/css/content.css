@@ -180,10 +180,12 @@
 	.label-horario{min-width: 2000px;}
 	.alerta
 	{
+		display:grid;
+		grid-template-columns: 1fr 5%;
 		background-color: #E30808;
 		color: white;
 		width: 100%;
-		height: 50px;
+		min-height: 50px;
 		margin: 0 auto;
 		padding: 10px 0;
 		text-align: center;
@@ -203,6 +205,8 @@
 		font-weight: 400;
 		font-family: arial;
 		text-align:center;
+		margin-left: auto;
+		border-stryle:none; 
 		
 	}
 	.btnAlerta:hover

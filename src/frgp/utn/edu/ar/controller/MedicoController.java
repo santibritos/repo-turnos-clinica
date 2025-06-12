@@ -188,6 +188,8 @@ public class MedicoController {
          	 mav.setViewName("abmlMedicos");
     	 }else
     	 {
+    		 List <Especialidad> especialidades = eneg.ReadAll();
+    	    	mav.addObject("especialidades",especialidades);
     		 mav.addObject("alertas",alertas);
     		 mav.setViewName("agregarMedico");
     	 }

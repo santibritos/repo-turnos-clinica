@@ -18,8 +18,14 @@
 	<form action="NuevoMedico.html" method="post">
 
 	<fieldset>
-	<c:if test="${alertas!=null}"><div class="alerta" id="alerta"><label id="labelAlerta" class="">${alertas}</label>
-		<button type="button" onclick="cerrarAlerta()" class="btnAlerta">x</button></div></c:if>
+	<c:if test="${alertas!=null}">
+		<div class="alerta" id="alerta">
+			<c:forEach items="${alertas}" var="alerta">
+			<label id="labelAlerta" class="uno">${alerta}</label>
+			</c:forEach>
+			<button type="button" onclick="cerrarAlerta()" class="btnAlerta">x</button>
+		</div>
+	</c:if>
 		<legend>Datos Personales</legend>
 		<br>
 			<label>Nombre</label>
@@ -40,7 +46,7 @@
 			<legend>Datos Profesionales</legend>
 			<br>
 			<label>Legajo</label>
-			<input required type="text" name="txtLegajo" class="txt">
+			<input required type="number" name="txtLegajo" class="txt">
 			<label>Especialidad:</label>
 			<select required name="txtEspecialidad">
 				<c:forEach items="${especialidades}" var="especialidad" >

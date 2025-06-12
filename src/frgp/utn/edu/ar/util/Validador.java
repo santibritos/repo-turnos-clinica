@@ -87,6 +87,14 @@ public class Validador {
 		return apellido.matches(regex) ? "valido" : "apellido no valido";
 	}
 	
+	public String validarLegajoNuevo(Integer legajo)
+	{
+		String regex = "^\\d{1,5}$";
+		
+		if(!legajo.toString().matches(regex))return "legajo no valido";
+		
+		return mneg.Exist(legajo) ? "El medico ya existe en la base de datos" : "valido";
+	}
 	public String validarLegajo(Integer legajo)
 	{
 		String regex = "^\\d{1,5}$";
@@ -94,12 +102,6 @@ public class Validador {
 		if(!legajo.toString().matches(regex))return "legajo no valido";
 		
 		return mneg.Exist(legajo) ? "valido" : "El medico no existe en la base de datos";
-	}
-	public String validarLegajoNuevo(Integer legajo)
-	{
-		String regex = "^\\d{1,5}$";
-		
-		return (!legajo.toString().matches(regex))? "legajo no valido" : "valido";
 	}
 	
 	public String validarContrasenia(String contra)
@@ -153,10 +155,10 @@ public class Validador {
 		respuesta = this.validarEmail(email);
 		if (respuesta!="valido") lista.add(respuesta);
 		
-		respuesta = this.validarLegajo(legajo);
+		respuesta = this.validarLegajoNuevo(legajo);
 		if (respuesta!="valido") lista.add(respuesta);
 		
-		if(contra != contra2)
+		if(!contra.matches(contra2))
 		{
 			lista.add("las contraseñas no coinciden");
 		}else
