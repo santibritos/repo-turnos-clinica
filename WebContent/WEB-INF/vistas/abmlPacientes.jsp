@@ -26,6 +26,14 @@ $(document).ready( function () {
 	<div class="main-content">
 		<h1 class="contenedor">PACIENTES</h1>
 <div class="contenedor">
+	<c:if test="${mensaje!=null}">
+		<div class="mensaje" id="mensaje">
+			
+			<label id="labelAlerta" class="uno">${mensaje}</label>
+			
+			<button type="button" onclick="cerrarMensaje()" class="btnMensaje">x</button>
+		</div>
+		</c:if>
 		<div>
 		<form action="altaPaciente.html">
 			<input type=submit value= Agregar class="btn btnVerde bmediano">
@@ -68,6 +76,13 @@ $(document).ready( function () {
 	</table>
 		</div>
 	</div>
+	<script>
+	function cerrarMensaje()
+	{
+		const alerta = document.getElementById('mensaje');
+		mensaje.style.display = 'none';
+	}
+	</script>
 <body>
 </body>
 </html>

@@ -143,9 +143,18 @@ public class TurnoController {
 				t.setFecha(java.sql.Date.valueOf(txtFecha));
 				t.setHora(java.sql.Time.valueOf(txtHora+":00"));
 				t.setEstado("pendiente");
-				neg.Add(t);
+				
+				try {
+					neg.Add(t);
+					mav.addObject("mensaje","Turno agregado con exito.");
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+					mav.addObject("mensaje","Error al agregar el turno.");
+				}
 				mav.addObject("listaTurnos",neg.ReadAll());
 				mav.setViewName("abmlTurnos");
+				
 			}
 		
 		return mav;
@@ -154,7 +163,15 @@ public class TurnoController {
 	@RequestMapping(value="bajaTurno{id}.html", method= RequestMethod.GET)
 	public ModelAndView bajaTurno( ModelAndView mav, @PathVariable int id)
 	{
-		neg.Delete(neg.ReadOne(id));
+		try
+		{
+			neg.Delete(neg.ReadOne(id));
+			mav.addObject("mensaje","Exito al eliminar el turno.");
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			mav.addObject("mensaje","Error al eliminar el turno.");
+		}
 		mav.addObject("listaTurnos",neg.ReadAll());
 		mav.setViewName("abmlTurnos");
 		return mav;

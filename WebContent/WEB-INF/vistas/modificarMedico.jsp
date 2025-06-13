@@ -80,7 +80,7 @@
                 <label for="password">Contraseña</label>
                 <input required type="password" class="txt" name="txtPassword" required value="${medico.usuario.password}"/>
                  <label for="password">Repetir Contraseña</label>
-                <input required type="password" class="txt" name="txtPassword2" required />
+                <input required type="password" class="txt" name="txtPassword2" required value="${medico.usuario.password}" />
             </fieldset>
 		<div class="botonera">
 		<br>

@@ -157,10 +157,12 @@ public class MedicoController {
         		 {
         			 h5.setEntrada(Time.valueOf(tViernes1+=":00"));
             		 h5.setSalida(Time.valueOf(tViernes2+=":00"));
+            		 mav.addObject("mensaje","Medico agregado con exito.");
         		 }catch(IllegalArgumentException e)
         		 {
         			 System.out.println(tViernes1);
         			 System.out.println(tViernes2);
+        			 mav.addObject("mensaje","Error al agregar el medico..");
         		 }
         	 }
         	 
@@ -293,10 +295,12 @@ public class MedicoController {
         		 {
         			 h5.setEntrada(Time.valueOf(tviernes1+=":00"));
             		 h5.setSalida(Time.valueOf(tviernes2+=":00"));
+            		 mav.addObject("mensaje","Medico modificado con exito.");
         		 }catch(IllegalArgumentException e)
         		 {
         			 System.out.println(tviernes1);
         			 System.out.println(tviernes2);
+        			 mav.addObject("mensaje","error al modificar el medico.");
         		 }
         	 }
         	
@@ -320,6 +324,7 @@ public class MedicoController {
         	 
         	 List<Medico> lista = neg.ReadAll();
         	 mav.addObject("listaMedicos",lista);
+        	
         	 mav.setViewName("abmlMedicos");
     	 }else {
     		 
@@ -338,6 +343,7 @@ public class MedicoController {
     	 List<Medico> lista = neg.ReadAll();
     	 mav.addObject("listaMedicos",lista);
     	 neg.Delete(neg.ReadOne(legajo));
+    	 mav.addObject("mensaje","Medico eliminado con exito.");
     	 mav.setViewName("abmlMedicos");
     	 return mav;
      }

@@ -71,9 +71,11 @@ public class PacienteController {
         	try
         	{
         		neg.Update(p);
+        		mav.addObject("mensaje","Paciente modificado con exito.");
         	}catch(Exception e)
         	{
         		e.printStackTrace();
+        		mav.addObject("mensaje","Error al modificar el paciente.");
         	}
         	mav.setViewName("abmlPacientes");
         	List<Paciente> listaPacientes = neg.ReadAll();
@@ -91,7 +93,7 @@ public class PacienteController {
     public ModelAndView bajaPaciente(ModelAndView mav, @PathVariable String dni)
     {
     	neg.Delete(neg.ReadOne(dni));
-    	
+    	mav.addObject("mensaje","Paciente eliminado con exito.");
     	List<Paciente> listaPacientes = neg.ReadAll();
     	mav.addObject("listaPacientes",listaPacientes);
     	mav.setViewName("abmlPacientes");
@@ -130,9 +132,11 @@ public class PacienteController {
         		mav.setViewName("abmlPacientes");
             	List<Paciente> listaPacientes = neg.ReadAll();
             	mav.addObject("listaPacientes",listaPacientes);
+            	mav.addObject("mensaje","Paciente agregado con exito.");
         	}catch(Exception e)
         	{
         		e.printStackTrace();
+        		mav.addObject("mensaje","Error al agregar el paciente.");
         	}
     	}else
     	{
