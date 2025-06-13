@@ -52,20 +52,38 @@ public class PacienteController {
     public ModelAndView modificarPaciente2(ModelAndView mav, String txtDni, String txtNombre, String txtApellido,
     		String txtEmail, String txtTelefono, String txtDireccion, String txtLocalidad, String txtNacimiento)
     {
-    	p.setNombre(txtNombre);
-    	p.setApellido(txtApellido);
-    	p.setDni(txtDni);
-    	p.setCorreo_electronico(txtEmail);
-    	p.setTelefono(txtTelefono);
-    	p.setDireccion(txtDireccion);
-    	p.setLocalidad(txtLocalidad);
-    	p.setFecha_nacimiento(java.sql.Date.valueOf(txtNacimiento));
-    	p.setEstado(true);
-    	neg.Update(p);
     	
-    	mav.setViewName("abmlPacientes");
-    	List<Paciente> listaPacientes = neg.ReadAll();
-    	mav.addObject("listaPacientes",listaPacientes);
+    	Validador v = new Validador();
+    	
+    	List<String> alertas = v.validarPaciente(txtDni, txtNombre, txtApellido, txtTelefono, txtEmail);
+    	
+    	if(alertas.isEmpty())
+    	{
+    		p.setNombre(txtNombre);
+        	p.setApellido(txtApellido);
+        	p.setDni(txtDni);
+        	p.setCorreo_electronico(txtEmail);
+        	p.setTelefono(txtTelefono);
+        	p.setDireccion(txtDireccion);
+        	p.setLocalidad(txtLocalidad);
+        	p.setFecha_nacimiento(java.sql.Date.valueOf(txtNacimiento));
+        	p.setEstado(true);
+        	try
+        	{
+        		neg.Update(p);
+        	}catch(Exception e)
+        	{
+        		e.printStackTrace();
+        	}
+        	mav.setViewName("abmlPacientes");
+        	List<Paciente> listaPacientes = neg.ReadAll();
+        	mav.addObject("listaPacientes",listaPacientes);
+    	}else
+    	{
+    		mav.addObject("alertas",alertas);
+    		mav.addObject("paciente",neg.ReadOne(txtDni));
+        	mav.setViewName("modificarPaciente");
+    	}
     	return mav;
     }
     

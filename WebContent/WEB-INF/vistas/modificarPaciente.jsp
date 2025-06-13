@@ -17,6 +17,14 @@
 			<form action="modificarPaciente2.html" method="post">
 	
 				<fieldset>
+				<c:if test="${alertas!=null}">
+					<div class="alerta" id="alerta">
+						<c:forEach items="${alertas}" var="alerta">
+						<label id="labelAlerta" class="uno">${alerta}</label>
+						</c:forEach>
+						<button type="button" onclick="cerrarAlerta()" class="btnAlerta">x</button>
+					</div>
+				</c:if>
 					<legend>Datos Personales</legend>
 					<br>
 						<label>DNI</label>
@@ -45,6 +53,12 @@
 	
 	</div>
 	
-	
+<script>
+	function cerrarAlerta()
+	{
+		const alerta = document.getElementById('alerta');
+		alerta.style.display = 'none';
+	}
+	</script>	
 </body>
 </html>

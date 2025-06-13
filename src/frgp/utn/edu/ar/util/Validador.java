@@ -138,6 +138,30 @@ public class Validador {
 		return lista;
 	}
 	
+	public List<String> validarPaciente(String dni, String nombre, String apellido, String telefono, String email)
+	{
+		List<String> lista = new ArrayList<String>();
+		
+		
+		String respuesta = this.validarDni(dni);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarNombre(nombre);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarApellido(apellido);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarTelefono(telefono);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarEmail(email);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		
+		return lista;
+	}
+	
 	public List<String> validarMedicoNuevo(String nombre, String apellido, String telefono, String email, Integer legajo, String contra, String contra2)
 	{
 		List<String> lista = new ArrayList<String>();
