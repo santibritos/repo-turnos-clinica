@@ -207,117 +207,128 @@ public class MedicoController {
      
      @RequestMapping(value="modificarMedico2.html")
      public ModelAndView probarcosa(ModelAndView mav,String txtNombre, String txtApellido, String txtTelefono, String txtEmail, String
-    		 txtDireccion, String txtLocalidad, int txtLegajo, int txtEspecialidad, String txtUsuario, String txtPassword,
+    		 txtDireccion, String txtLocalidad, int txtLegajo, int txtEspecialidad, String txtUsuario, String txtPassword,String txtPassword2,
     		 String cblunes, String cbmartes, String cbmiercoles, String cbjueves, String cbviernes,
     		 String tlunes1, String tlunes2, String tmartes1, String tmartes2, String tmiercoles1, String tmiercoles2,
     		 String tjueves1, String tjueves2, String tviernes1, String tviernes2) 
      {
-    	 u.setUsuario(txtUsuario);
-    	 u.setPassword(txtPassword);
-    	 uneg.Update(u);
+    	 Validador v = new Validador();
     	 
-    	 System.out.println("<<<<<<<<<<<<<<<<<< ----- EN MODIFICAR MEDICO ------------- >>>>>");
-    	 System.out.println("Lunes "+tlunes1+" "+tlunes2+ "Martes "+tmartes1+" "+tmartes2+" Miercoles "+tmiercoles1+" "+tmiercoles2+" Jueves "
-    	 +tjueves1+" "+tjueves2+ "Viernes "+tviernes1+" "+tviernes2);
+    	 List<String> alertas = v.validarMedico(txtNombre, txtApellido, txtTelefono, txtEmail, txtLegajo, txtPassword, txtPassword2);
     	 
-    	 m.setUsuario(u);
-    	 m.setNombre(txtNombre);
-    	 m.setApellido(txtApellido);
-    	 m.setLegajo(txtLegajo);
-    	 m.setEspecialidad(eneg.ReadOne(txtEspecialidad));
-    	 m.setCorreoElectronico(txtEmail);
-    	 m.setTelefono(txtTelefono);
-    	 m.setLocalidad(txtLocalidad);
-    	 m.setDireccion(txtDireccion);
-    	// m.setHorario(txtHorario);
-    	 m.setEstado(true);
-    	 
-    	 if(cblunes != null) 
+    	 if(alertas.isEmpty())
     	 {
-    		 try
-    		 {
-    			 h1.setEntrada(Time.valueOf(tlunes1+":00"));
-        		 h1.setSalida(Time.valueOf(tlunes2+":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tlunes1);
-    		 }
+    		 u.setUsuario(txtUsuario);
+        	 u.setPassword(txtPassword);
+        	 uneg.Update(u);
+        	 
+        	 System.out.println("<<<<<<<<<<<<<<<<<< ----- EN MODIFICAR MEDICO ------------- >>>>>");
+        	 System.out.println("Lunes "+tlunes1+" "+tlunes2+ "Martes "+tmartes1+" "+tmartes2+" Miercoles "+tmiercoles1+" "+tmiercoles2+" Jueves "
+        	 +tjueves1+" "+tjueves2+ "Viernes "+tviernes1+" "+tviernes2);
+        	 
+        	 m.setUsuario(u);
+        	 m.setNombre(txtNombre);
+        	 m.setApellido(txtApellido);
+        	 m.setLegajo(txtLegajo);
+        	 m.setEspecialidad(eneg.ReadOne(txtEspecialidad));
+        	 m.setCorreoElectronico(txtEmail);
+        	 m.setTelefono(txtTelefono);
+        	 m.setLocalidad(txtLocalidad);
+        	 m.setDireccion(txtDireccion);
+        	// m.setHorario(txtHorario);
+        	 m.setEstado(true);
+        	 
+        	 if(cblunes != null) 
+        	 {
+        		 try
+        		 {
+        			 h1.setEntrada(Time.valueOf(tlunes1+":00"));
+            		 h1.setSalida(Time.valueOf(tlunes2+":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tlunes1);
+        		 }
+        		 
+        	 }
+        	 if(cbmartes != null) 
+        	 {
+        		 try
+        		 {
+        			 h2.setEntrada(Time.valueOf(tmartes1+=":00"));
+            		 h2.setSalida(Time.valueOf(tmartes2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tmartes1);
+        			 System.out.println(tmartes2);
+        		 }
+        		
+        	 }
+        	 if(cbmiercoles != null) 
+        	 {
+        		 try
+        		 {
+        			 h3.setEntrada(Time.valueOf(tmiercoles1+=":00"));
+            		 h3.setSalida(Time.valueOf(tmiercoles2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tmiercoles1);
+        			 System.out.println(tmiercoles2);
+        		 }
+        	 }
+        	 if(cbjueves != null) 
+        	 {
+        		 try
+        		 {
+        			 h4.setEntrada(Time.valueOf(tjueves1+=":00"));
+            		 h4.setSalida(Time.valueOf(tjueves2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tjueves1);
+        			 System.out.println(tjueves2);
+        		 }
+        	 }
+        	 if(cbviernes != null) 
+        	 {
+        		 try
+        		 {
+        			 h5.setEntrada(Time.valueOf(tviernes1+=":00"));
+            		 h5.setSalida(Time.valueOf(tviernes2+=":00"));
+        		 }catch(IllegalArgumentException e)
+        		 {
+        			 System.out.println(tviernes1);
+        			 System.out.println(tviernes2);
+        		 }
+        	 }
+        	
+        	 h1.setDia(dneg.readOne(1));
+    		 h2.setDia(dneg.readOne(2));
+    		 h3.setDia(dneg.readOne(3));
+    		 h4.setDia(dneg.readOne(4));
+    		 h5.setDia(dneg.readOne(5));
+        	 
+        	 listaHorarios = new ArrayList<Horario>();
+        	 
+        	 listaHorarios.add(h1);
+        	 listaHorarios.add(h2);
+        	 listaHorarios.add(h3);
+        	 listaHorarios.add(h4);
+        	 listaHorarios.add(h5);
+        	 
+        	 m.setListaHorarios(listaHorarios);
+        	
+        	 neg.Update(m);
+        	 
+        	 List<Medico> lista = neg.ReadAll();
+        	 mav.addObject("listaMedicos",lista);
+        	 mav.setViewName("abmlMedicos");
+    	 }else {
     		 
+    		 mav.addObject("alertas",alertas);
+    		 List <Especialidad> especialidades = eneg.ReadAll();
+        	 mav.addObject("especialidades",especialidades);
+        	 mav.addObject("medico",neg.ReadOne(txtLegajo));
+        	 mav.setViewName("modificarMedico");
     	 }
-    	 if(cbmartes != null) 
-    	 {
-    		 try
-    		 {
-    			 h2.setEntrada(Time.valueOf(tmartes1+=":00"));
-        		 h2.setSalida(Time.valueOf(tmartes2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tmartes1);
-    			 System.out.println(tmartes2);
-    		 }
-    		
-    	 }
-    	 if(cbmiercoles != null) 
-    	 {
-    		 try
-    		 {
-    			 h3.setEntrada(Time.valueOf(tmiercoles1+=":00"));
-        		 h3.setSalida(Time.valueOf(tmiercoles2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tmiercoles1);
-    			 System.out.println(tmiercoles2);
-    		 }
-    	 }
-    	 if(cbjueves != null) 
-    	 {
-    		 try
-    		 {
-    			 h4.setEntrada(Time.valueOf(tjueves1+=":00"));
-        		 h4.setSalida(Time.valueOf(tjueves2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tjueves1);
-    			 System.out.println(tjueves2);
-    		 }
-    	 }
-    	 if(cbviernes != null) 
-    	 {
-    		 try
-    		 {
-    			 h5.setEntrada(Time.valueOf(tviernes1+=":00"));
-        		 h5.setSalida(Time.valueOf(tviernes2+=":00"));
-    		 }catch(IllegalArgumentException e)
-    		 {
-    			 System.out.println(tviernes1);
-    			 System.out.println(tviernes2);
-    		 }
-    	 }
-    	
-    	 h1.setDia(dneg.readOne(1));
-		 h2.setDia(dneg.readOne(2));
-		 h3.setDia(dneg.readOne(3));
-		 h4.setDia(dneg.readOne(4));
-		 h5.setDia(dneg.readOne(5));
-    	 
-    	 listaHorarios = new ArrayList<Horario>();
-    	 
-    	 listaHorarios.add(h1);
-    	 listaHorarios.add(h2);
-    	 listaHorarios.add(h3);
-    	 listaHorarios.add(h4);
-    	 listaHorarios.add(h5);
-    	 
-    	 m.setListaHorarios(listaHorarios);
-    	
-    	 neg.Update(m);
-    	 
-    	 List<Medico> lista = neg.ReadAll();
-    	 mav.addObject("listaMedicos",lista);
-    	 mav.setViewName("abmlMedicos");
-    	 
-    	 
-    	 mav.setViewName("abmlMedicos");
     	 return mav;
      }
      

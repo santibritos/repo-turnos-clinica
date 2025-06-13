@@ -169,4 +169,36 @@ public class Validador {
 		
 		return lista;
 	}
+	
+	public List<String> validarMedico(String nombre, String apellido, String telefono, String email, Integer legajo, String contra, String contra2)
+	{
+		List<String> lista = new ArrayList<String>();
+		
+		
+		String respuesta = this.validarNombre(nombre);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarApellido(apellido);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarTelefono(telefono);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarEmail(email);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		respuesta = this.validarLegajo(legajo);
+		if (respuesta!="valido") lista.add(respuesta);
+		
+		if(!contra.matches(contra2))
+		{
+			lista.add("las contraseñas no coinciden");
+		}else
+		{
+			respuesta = this.validarContrasenia(contra);
+			if (respuesta!="valido") lista.add(respuesta);
+		}
+		
+		return lista;
+	}
 }

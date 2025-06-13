@@ -21,6 +21,14 @@
 		<form action="modificarMedico2.html" method="post">
 
 	<fieldset>
+		<c:if test="${alertas!=null}">
+			<div class="alerta" id="alerta">
+				<c:forEach items="${alertas}" var="alerta">
+				<label id="labelAlerta" class="uno">${alerta}</label>
+				</c:forEach>
+				<button type="button" onclick="cerrarAlerta()" class="btnAlerta">x</button>
+			</div>
+		</c:if>
 		<legend>Datos Personales</legend>
 		<br>
 			<label>Nombre</label>
@@ -71,6 +79,8 @@
 
                 <label for="password">Contraseña</label>
                 <input required type="password" class="txt" name="txtPassword" required value="${medico.usuario.password}"/>
+                 <label for="password">Repetir Contraseña</label>
+                <input required type="password" class="txt" name="txtPassword2" required />
             </fieldset>
 		<div class="botonera">
 		<br>
@@ -80,6 +90,13 @@
 	</div>
 	
 </div>
+	<script>
+	function cerrarAlerta()
+	{
+		const alerta = document.getElementById('alerta');
+		alerta.style.display = 'none';
+	}
+	</script>
 <script>
 // carga la especialidad del medico a modificar en el select
 let especialidades = document.getElementById("sEspecialidades");
