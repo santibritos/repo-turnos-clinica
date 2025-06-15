@@ -20,26 +20,6 @@ $(document).ready( function () {
     $('#tabla').DataTable();
 } );
 </script>
-<style>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-}
-</style>
 </head>
 <body>
 <%@include file="clienteSideBar.jsp"%>

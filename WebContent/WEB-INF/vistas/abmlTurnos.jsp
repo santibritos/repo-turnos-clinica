@@ -46,7 +46,9 @@ $(document).ready( function () {
 						<th>Id</th>
 						<th>Fecha</th>
 						<th>Hora</th>
-						<th>Dni paciente</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Dni</th>
 						<th>Legajo Medico</th>
 						<th>Estado</th>
 						<th>Acciones</th>
@@ -58,12 +60,15 @@ $(document).ready( function () {
 	     				<td>${turno.id}</td>
 				            <td><fmt:formatDate value="${turno.fecha}" pattern="dd/MM/yyyy" /></td>
 				            <td>${turno.hora}</td>
+				            <td>${turno.paciente.nombre}</td>
+				            <td>${turno.paciente.apellido}</td>
 				            <td>${turno.paciente.dni}</td>
 				            <td>${turno.medico.legajo}</td>
 				            <td>${turno.estado}</td>
 							<td>
 		                     <a href = "modificarTurno${turno.id}.html" class = "btn btnAzul bchico">Actualizar</a>
-		                     <a href = "bajaTurno${turno.id}.html" class = "btn btnRojo bchico">Delete</a><br/>
+		                     <button class="btn btnRojo bchico" type="button" onclick="abrirModalConfirmacion(${turno.id},'${turno.paciente.nombre}','${turno.paciente.apellido}','${turno.hora}')">Eliminar</button>
+		                   	<br/>
 		                    </td>
 	     		</tr>
 	     	</c:forEach>
@@ -71,6 +76,42 @@ $(document).ready( function () {
 	</table>
 		</div>
 	</div>
+	<div id="modalConfirmacion" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h2 id="h2Modal"></h2>
+     <br>
+     <input type="text" hidden>
+     <label>Seguro que desea eliminar el turno?</label><br>
+     <label id="infoModal"></label>
+    <br> <br>
+    <input id="agarraId" type="text" readonly hidden>
+    <div class="botonera">
+    <a id="linkEliminar" class="btn btnAzul bchico" href="#">Eliminar</a>
+    <button class="btn btnRojo bchico" onclick="cerrarModal()">Cancelar</button>
+    </div>
+    
+  </div>
+</div>
+<script type="text/javascript">
+function abrirModalConfirmacion(id,nombre,apellido,hora) {
+	
+ const h2 = document.getElementById('h2Modal');
+ const info = document.getElementById('infoModal');
+ const agarraId = document.getElementById('agarraId');
+ const link = document.getElementById('linkEliminar');
+ agarraId.value = id;
+ h2.textContent = 'Turno '+id;
+ info.textContent = apellido+", "+nombre+": "+hora+".";
+ link.href = 'bajaTurno' + id + '.html';
+	
+  $('#modalConfirmacion').show();
+}
+
+function cerrarModal() {
+  $('#modalConfirmacion').hide();
+}
+
+</script>
 	<script>
 	function cerrarMensaje()
 	{
