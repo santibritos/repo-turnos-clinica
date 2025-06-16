@@ -337,7 +337,7 @@ public class MedicoController {
     	 return mav;
      }
      
-     @RequestMapping(value="bajaMedico{legajo}")
+     @RequestMapping(value="bajaMedico{legajo}.html")
      public ModelAndView bajaMedico(ModelAndView mav,@PathVariable int legajo)
      {
     	 List<Medico> lista = neg.ReadAll();

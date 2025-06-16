@@ -21,6 +21,7 @@ $(document).ready( function () {
 } );
 </script>
 </head>
+<body>
 <%@include file="adminSideBar.jsp" %>
 
 	<div class="main-content">
@@ -67,7 +68,7 @@ $(document).ready( function () {
 				            <td>${paciente.telefono}</td>
 							<td>
 		                     <a href = "modificarPaciente${paciente.dni}.html" class = "btn btnAzul bchico">Actualizar</a>
-		                     <a href = "bajaPaciente${paciente.dni}.html" class = "btn btnRojo bchico">Delete</a><br/>
+		                     <button class="btn btnRojo bchico" type="button" onclick="abrirModalConfirmacion(${paciente.dni},'${paciente.nombre}','${paciente.apellido}')">Eliminar</button>
 		                    </td>
 	     		</tr>
 	     		</c:if>
@@ -76,6 +77,42 @@ $(document).ready( function () {
 	</table>
 		</div>
 	</div>
+		<div id="modalConfirmacion" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h2 id="h2Modal"></h2>
+     <br>
+     <input type="text" hidden>
+     <label>Seguro que desea eliminar el paciente?</label><br>
+     <label id="infoModal"></label>
+    <br> <br>
+    <input id="agarraId" type="text" readonly hidden>
+    <div class="botonera">
+    <a id="linkEliminar" class="btn btnAzul bchico" href="#">Eliminar</a>
+    <button class="btn btnRojo bchico" onclick="cerrarModal()">Cancelar</button>
+    </div>
+    
+  </div>
+</div>
+	<script type="text/javascript">
+function abrirModalConfirmacion(id,nombre,apellido) {
+	
+ const h2 = document.getElementById('h2Modal');
+ const info = document.getElementById('infoModal');
+ const agarraId = document.getElementById('agarraId');
+ const link = document.getElementById('linkEliminar');
+ agarraId.value = id;
+ h2.textContent = 'Paciente '+id;
+ info.textContent = apellido+", "+nombre+".";
+ link.href = 'bajaPaciente' + id + '.html';
+	
+  $('#modalConfirmacion').show();
+}
+
+function cerrarModal() {
+  $('#modalConfirmacion').hide();
+}
+
+</script>
 	<script>
 	function cerrarMensaje()
 	{
@@ -83,6 +120,6 @@ $(document).ready( function () {
 		mensaje.style.display = 'none';
 	}
 	</script>
-<body>
+
 </body>
 </html>
