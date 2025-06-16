@@ -157,12 +157,11 @@ public class MedicoController {
         		 {
         			 h5.setEntrada(Time.valueOf(tViernes1+=":00"));
             		 h5.setSalida(Time.valueOf(tViernes2+=":00"));
-            		 mav.addObject("mensaje","Medico agregado con exito.");
+            		 
         		 }catch(IllegalArgumentException e)
         		 {
         			 System.out.println(tViernes1);
         			 System.out.println(tViernes2);
-        			 mav.addObject("mensaje","Error al agregar el medico..");
         		 }
         	 }
         	 
@@ -182,8 +181,16 @@ public class MedicoController {
         	 listaHorarios.add(h5);
         	 
         	 m.setListaHorarios(listaHorarios);
+        	 try
+        	 {
+        		 neg.Add(m);
+        		 mav.addObject("mensaje","Medico agregado con exito.");
+        	 }catch(Exception e) 
+        	 {
+        		 e.printStackTrace();
+        		 mav.addObject("mensaje","Error al agregar el medico..");
+        		 }
         	 
-        	 neg.Add(m);
         	 
         	 List<Medico> lista = neg.ReadAll();
         	 mav.addObject("listaMedicos",lista);
@@ -295,12 +302,11 @@ public class MedicoController {
         		 {
         			 h5.setEntrada(Time.valueOf(tviernes1+=":00"));
             		 h5.setSalida(Time.valueOf(tviernes2+=":00"));
-            		 mav.addObject("mensaje","Medico modificado con exito.");
         		 }catch(IllegalArgumentException e)
         		 {
         			 System.out.println(tviernes1);
         			 System.out.println(tviernes2);
-        			 mav.addObject("mensaje","error al modificar el medico.");
+        			 
         		 }
         	 }
         	
@@ -320,7 +326,14 @@ public class MedicoController {
         	 
         	 m.setListaHorarios(listaHorarios);
         	
-        	 neg.Update(m);
+        	try {
+        		neg.Update(m);
+        		mav.addObject("mensaje","Medico modificado con exito.");
+        	}catch(Exception e)
+        	{
+        		e.printStackTrace();
+        		mav.addObject("mensaje","error al modificar el medico.");
+        	}
         	 
         	 List<Medico> lista = neg.ReadAll();
         	 mav.addObject("listaMedicos",lista);
